@@ -37,7 +37,7 @@ public class Svømmeklub implements Serializable {
         return membership;
     }
 
-    public int getMemberAge() {
+    public Date getMemberAge() {
         return memberAge;
     }
 

@@ -1,3 +1,7 @@
+import java.lang.reflect.Member;
+import java.util.*;
+
+
 public class Database {
 
     ArrayList<Svømmeklub> swimList = new ArrayList<>();
