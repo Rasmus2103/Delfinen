@@ -9,6 +9,8 @@ public class Svømmeklub implements Serializable {
     private String membership;
     private Date memberAge;
     private boolean isStudying;
+    private int memberNumber;
+    private String eMail;
 
 
     //Konstruktør
@@ -18,6 +20,8 @@ public class Svømmeklub implements Serializable {
         this.membership = membership;
         this.memberAge = memberAge;
         this.isStudying = isStudying;
+        this.memberNumber = memberNumber;
+        this.eMail = eMail;
 
     }
 
@@ -45,6 +49,14 @@ public class Svømmeklub implements Serializable {
         return isStudying;
     }
 
+    public int getMemberNumber(){
+        return memberNumber;
+    }
+
+    public String geteMail(){
+        return eMail;
+    }
+
 
     //setter
     public void setmemberName(String memberName) {
@@ -55,7 +67,39 @@ public class Svømmeklub implements Serializable {
         this.activities = activities;
     }
 
+    public void setMembership(String membership) {
+        this.membership = membership;
+    }
+
+    public void setMemberAge(Date memberAge){
+        this.memberAge = memberAge;
+    }
+
     public void setisStudying(boolean isStudying) {
         this.isStudying = isStudying;
+    }
+
+    public void setMemberNumber(int memberNumber){
+        this.memberNumber = memberNumber;
+    }
+
+    public void seteMail(String eMail){
+        this.eMail = eMail;
+    }
+
+    @Override
+    public String toString() {
+        return "Svømmeklub{" +
+                "memberName='" + memberName + '\'' +
+                ", activities='" + activities + '\'' +
+                ", memberAge=" + memberAge +
+                ", isStudying=" + isStudying +
+                ", memberNumber=" + memberNumber +
+                ", eMail='" + eMail + '\'' +
+                '}';
+    }
+
+    public String csvToString() {
+        return memberName + "," + activities + "," + memberAge + "," + isStudying + "," + memberNumber + "," + eMail;
     }
 }
