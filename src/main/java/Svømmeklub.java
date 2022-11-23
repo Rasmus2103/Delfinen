@@ -1,18 +1,21 @@
 import java.io.Serializable;
+import java.util.Date;
 
 public class Svømmeklub implements Serializable {
 
     //Attributer
     private String memberName;
     private String activities;
-    private int memberAge;
+    private String membership;
+    private Date memberAge;
     private boolean isStudying;
 
 
     //Konstruktør
-    public Svømmeklub(String memberName, String activities, int memberAge, boolean isStudying) {
+    public Svømmeklub(String memberName, String activities, String membership, Date memberAge, boolean isStudying, int memberNumber, String eMail) {
         this.memberName = memberName;
         this.activities = activities;
+        this.membership = membership;
         this.memberAge = memberAge;
         this.isStudying = isStudying;
 
@@ -30,12 +33,15 @@ public class Svømmeklub implements Serializable {
         return activities;
     }
 
+    public String getMembership() {
+        return membership;
+    }
+
     public int getMemberAge() {
         return memberAge;
     }
 
     public boolean getisStudying() {
-
         return isStudying;
     }
 
@@ -47,10 +53,6 @@ public class Svømmeklub implements Serializable {
 
     public void setActivities(String activities) {
         this.activities = activities;
-    }
-
-    public void setMemberAge(int memberAge) {
-        this.memberAge = memberAge;
     }
 
     public void setisStudying(boolean isStudying) {
