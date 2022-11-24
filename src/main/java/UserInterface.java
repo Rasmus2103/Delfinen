@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
@@ -86,25 +89,9 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets har medlems nr.: " + memberNumber);
             System.out.println(" ");
 
-            /*System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være Motionist eller Konkurrencesvømmer");
-            String motionist = "Motionistsvømmer";
-            String competition = "Konkurrencesvømmer";
-            System.out.println("""
-                    1. Motionistsvømmer
-                    2. Konkurrencesvømmer
-                    """);
-            switch (readInt()) {
-                case 1:
-                    System.out.println("Du registreret at medlemmet er: " + motionist);
-                    break;
-                case 2:
-                    System.out.println("Du har registreret at medlemmet er " + competition);
-                    break;
-                default:
-                    System.out.println("Dit input er ikke gyldigt, indtast enten 1 eller 2");
-                    break;
-
-            }*/
+            System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være Motionist eller Konkurrencesvømmer");
+            String activity = sc.nextLine();
+            System.out.println("Du har registreret følgende aktivitet: " + activity);
             System.out.println(" ");
 
             sc.nextLine();
@@ -115,8 +102,11 @@ public class UserInterface {
             System.out.println(" ");
 
             System.out.println("Indtast medlemmets fødselsdags dato");
-            String memberAge = sc.nextLine();
-            System.out.println("Du har registreret medlemmets fødselsdato er: " + memberAge);
+            LocalDate age = LocalDate.of(1982, 1, 1);
+            Period p1 = Period.between(LocalDate.now(), age);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+            String memberAge = String.valueOf(formatter);
+            System.out.println("Du har registreret medlemmets fødselsdato er: " + p1.getYears() + "/" + p1.getMonths() + "/" + p1.getDays());
             System.out.println(" ");
 
 
@@ -144,7 +134,7 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
 
-            //controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail);
+            controller.addMember(memberName, activity, membership, age, isStudying, memberNumber, eMail);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

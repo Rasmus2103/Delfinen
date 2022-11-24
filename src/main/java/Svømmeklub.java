@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Svømmeklub implements Serializable {
@@ -7,14 +8,14 @@ public class Svømmeklub implements Serializable {
     private String memberName;
     private String activities;
     private String membership;
-    private Date memberAge;
+    private LocalDate memberAge;
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
 
 
     //Konstruktør
-    public Svømmeklub(String memberName, String activities, String membership, Date memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public Svømmeklub(String memberName, String activities, String membership, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -41,7 +42,7 @@ public class Svømmeklub implements Serializable {
         return membership;
     }
 
-    public Date getMemberAge() {
+    public LocalDate getMemberAge() {
         return memberAge;
     }
 
@@ -71,7 +72,7 @@ public class Svømmeklub implements Serializable {
         this.membership = membership;
     }
 
-    public void setMemberAge(Date memberAge){
+    public void setMemberAge(LocalDate memberAge){
         this.memberAge = memberAge;
     }
 

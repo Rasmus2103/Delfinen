@@ -1,5 +1,5 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Controller {
     Database database = new Database();
@@ -7,7 +7,7 @@ public class Controller {
     FileHandler fileHandler = new FileHandler();
 
 
-    public void addMember(String memberName, String activities, String memberShip, Date memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public void addMember(String memberName, String activities, String memberShip, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
         database.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
     }
 
@@ -22,6 +22,19 @@ public class Controller {
     public void removeMember(int number) {
         database.swimList.remove(number);
     }
+
+    public ArrayList<Svømmeklub> searchByName(String searchMemberName) {
+        return database.searchByMemberName(searchMemberName);
+    }
+
+    public ArrayList<Svømmeklub> searchByActivities(String searchActivity) {
+        return database.searchByActivities(searchActivity);
+    }
+
+    public ArrayList<Svømmeklub> searchByMembership(String searchMembership) {
+        return database.searchByMembership(searchMembership);
+    }
+
 
     public void loadDB() {
         database.setSwimList(fileHandler.loadDB());

@@ -1,4 +1,4 @@
-import java.lang.reflect.Member;
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -6,7 +6,7 @@ public class Database {
 
     ArrayList<Svømmeklub> swimList = new ArrayList<>();
 
-    public void addMember(String memberName, String activities, String memberShip, Date memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public void addMember(String memberName, String activities, String memberShip, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
         swimList.add(new Svømmeklub(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail));
     }
 
@@ -56,7 +56,7 @@ public class Database {
         return searchList;
     }
 
-    public ArrayList<Svømmeklub> searchByMemberAge(Date searchMemberAge) {
+    public ArrayList<Svømmeklub> searchByMemberAge(LocalDate searchMemberAge) {
         ArrayList<Svømmeklub> searchList = new ArrayList<>();
         for (Svømmeklub memberAgeSearch : swimList) {
             if (memberAgeSearch.getMemberAge() == searchMemberAge) {

@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,6 +31,7 @@ public class FileHandler {
 
     public ArrayList<Svømmeklub> loadDB() {
         ArrayList<Svømmeklub> listOfMembers = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
         try {
             Scanner sc = new Scanner(swimCSV);
             while(sc.hasNextLine()) {
@@ -37,7 +40,7 @@ public class FileHandler {
                         Strings[0],
                         Strings[1],
                         Strings[2],
-                        new SimpleDateFormat("dd-MM-yyyy").parse(Strings[3]),
+                        LocalDate.parse(Strings[3], formatter),
                         Boolean.parseBoolean(Strings[4]),
                         Integer.parseInt(Strings[5]),
                         Strings[6]
