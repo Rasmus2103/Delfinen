@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -81,6 +82,10 @@ public class UserInterface {
             System.out.println("Du har registreret følgende navn: " + memberName);
             System.out.println(" ");
 
+            int memberNumber = sc.nextInt();
+            System.out.println("Du har registreret at medlemmets har medlems nr.: " + memberNumber);
+            System.out.println(" ");
+
             /*System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være Motionist eller Konkurrencesvømmer");
             String motionist = "Motionistsvømmer";
             String competition = "Konkurrencesvømmer";
@@ -111,7 +116,7 @@ public class UserInterface {
 
             System.out.println("Indtast medlemmets fødselsdags dato");
             String memberAge = sc.nextLine();
-            System.out.println("You have chosen power(s) to be: " + memberAge);
+            System.out.println("Du har registreret medlemmets fødselsdato er: " + memberAge);
             System.out.println(" ");
 
 
@@ -134,14 +139,9 @@ public class UserInterface {
                     break;
             }
 
-            System.out.println("Please enter the height of the hero: \nPlease comma (,) to seperate priods and press ENTER");
-            int memberNumber = sc.nextInt();
-            System.out.println("You have chosen height to be: " + memberNumber);
-            System.out.println(" ");
-
-            System.out.println("Please enter the height of the hero: \nPlease comma (,) to seperate priods and press ENTER");
+            System.out.println("Indtast medlemmets email adresse");
             String eMail = sc.nextLine();
-            System.out.println("You have chosen height to be: " + eMail);
+            System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
 
             //controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail);
@@ -153,7 +153,7 @@ public class UserInterface {
 
     public void editMember() {
         try {
-            System.out.println("Enter the number of which superhero you wanna edit: ");
+            System.out.println("Vælg et medlem du ønsker at redigere i (Vælg ved at indtaste deres medlemsnummer): ");
             for (int i = 0; i < controller.getSwimList().size(); i++) {
                 System.out.println(i + 1 + ":" + controller.getSwimList().get(i));
             }
@@ -162,51 +162,56 @@ public class UserInterface {
             sc.nextLine();
 
             Svømmeklub editMember = controller.getSwimList().get(number - 1);
-            System.out.println("Adjusting following superhero " + editMember);
+            System.out.println("Du er igang med at redigere i " + editMember);
 
             //Ændring af medlemmets navn
-            System.out.println("Edit data and press ENTER. If you do not wish to edit any data press ENTER");
-            System.out.println("Currently editing superhero name: " + editMember.getmemberName());
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere: " + editMember.getmemberName());
             String memberNewName = sc.nextLine();
             if (!memberNewName.isEmpty())
                 editMember.setmemberName(memberNewName);
 
             //Ændring af medlemmets aktivitetsform
-            System.out.println("Edit data and press ENTER. If you do not wish to edit data enter 0 and press ENTER");
-            System.out.println("Currently editing superhero height: " + editMember.getActivities());
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere: " + editMember.getActivities());
             String memberNewActivity = sc.nextLine();
             if (!memberNewActivity.isEmpty())
                 editMember.setActivities(memberNewActivity);
 
             //Ændring af medlemmets medlemsskab
-            System.out.println("Edit data and press ENTER. If you do not wish to edit any data press ENTER");
-            System.out.println("Currently editing superhero powers: " + editMember.getMembership());
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere: " + editMember.getMembership());
             String memberNewMembership = sc.nextLine();
             if (!memberNewMembership.trim().isEmpty())
                 editMember.setMembership(memberNewMembership);
 
             //Ændring om medlemmet studerer eller ej
-            System.out.println("Edit data and press ENTER. If you do not wish to edit any data press ENTER");
-            System.out.println("Currently editing superhero origin. \nPress 1 and press ENTER if origin is from earth. \nPress 2 and ENTER if origin is not from earth.\nPress 3 and ENTER if you do not wish to change origin.");
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere om medlemmet er studerende eller ikke studerende: " +
+                    "\nTast 1 og tryk ENTER hvis medlemmet er studerende. " +
+                    "\nTast 2 og tryk ENTER hvis medlemmet ikke er studerende" +
+                    "\nTast 3 og tryk ENTER hvis der ikke skal redigeres");
             int memberStudyingOrNot = readInt();
             if (memberStudyingOrNot == 1) {
                 editMember.setisStudying(true);
             } else if (memberStudyingOrNot == 2) {
                 editMember.setisStudying(false);
             } else if (memberStudyingOrNot == 3) {
-                System.out.println("No changes to origin");
+                System.out.println("Ingen videre ændring");
             } else {
-                System.out.println("Not a valid option. No changes to origin..");
+                System.out.println("Input ikke gyldigt, der er ikke sket en ændring");
             }
 
-            System.out.println("Edit data and press ENTER. If you do not wish to edit any data press ENTER");
-            System.out.println("Currently editing superhero weakness(s): " + editMember.geteMail());
+            //Ændring af medlemmets email adresse
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere: " + editMember.geteMail());
             String memberNewEmail = sc.nextLine();
             if (!memberNewEmail.trim().isEmpty())
                 editMember.seteMail(memberNewEmail);
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No hero with corresponding number to edit.\nReturning to main menu");
+            System.out.println("Der findes ikke et medlem med det nummer");
+            editMember();
         }
     }
 
@@ -215,12 +220,12 @@ public class UserInterface {
             for (int i = 0; i < controller.getSwimList().size(); i++) {
                 System.out.println(i + ":" + controller.showSwimList().get(i));
             }
-            System.out.println("Vælg det medlem du ønsker at slette");
+            System.out.println("Vælg det medlem du ønsker at slette ud fra deres medlemsnummer");
             int number = readInt();
 
             controller.removeMember(number);
 
-            System.out.println("Du har slettet medlem nr. " + number + " fra databasens");
+            System.out.println("Du har slettet medlem nr. " + number + " fra databasen");
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Der er ingen medlemmer med dette nummer \n Vender tilbage til hovedmenuen");

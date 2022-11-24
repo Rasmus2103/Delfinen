@@ -26,6 +26,66 @@ public class Database {
         this.swimList = swimList;
     }
 
+    public ArrayList<Svømmeklub> searchByMemberName(String searchName) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub nameSearch : swimList) {
+            if (nameSearch.getmemberName().toLowerCase().contains(searchName.toLowerCase())) {
+                searchList.add(nameSearch);
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<Svømmeklub> searchByActivities(String searchActivity) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub activitySearch : swimList) {
+            if (activitySearch.getActivities().toLowerCase().contains(searchActivity.toLowerCase())) {
+                searchList.add(activitySearch);
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<Svømmeklub> searchByMembership(String searchMembership) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub membershipSearch : swimList) {
+            if (membershipSearch.getMembership().toLowerCase().contains(searchMembership.toLowerCase())) {
+                searchList.add(membershipSearch);
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<Svømmeklub> searchByMemberAge(Date searchMemberAge) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub memberAgeSearch : swimList) {
+            if (memberAgeSearch.getMemberAge() == searchMemberAge) {
+                searchList.add(memberAgeSearch);
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<Svømmeklub> searchByStudying(boolean searchStudying) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub memberStudying : swimList) {
+            if (memberStudying.getisStudying() == searchStudying) {
+                searchList.add(memberStudying);
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<Svømmeklub> searchByEmail(String searchEmail) {
+        ArrayList<Svømmeklub> searchList = new ArrayList<>();
+        for (Svømmeklub memberEmailSearch : swimList) {
+            if (memberEmailSearch.geteMail().toLowerCase().contains(searchEmail.toLowerCase())) {
+                searchList.add(memberEmailSearch);
+            }
+        }
+        return searchList;
+    }
+
     // få nummer på medlem, virker ikke rigtig så
 
     public String getarraylist(int x) {
@@ -52,7 +112,7 @@ public class Database {
 
 
         public void printDB () {
-            System.out.println("The following heroes was found:");
+            System.out.println("Følgende medlemmer blev fundet: ");
             for (Svømmeklub s : swimList) {
                 System.out.println(s);
             }

@@ -92,6 +92,7 @@ public class Svømmeklub implements Serializable {
         return "Svømmeklub{" +
                 "memberName='" + memberName + '\'' +
                 ", activities='" + activities + '\'' +
+                ", membership='" + membership + '\'' +
                 ", memberAge=" + memberAge +
                 ", isStudying=" + isStudying +
                 ", memberNumber=" + memberNumber +
@@ -100,6 +101,6 @@ public class Svømmeklub implements Serializable {
     }
 
     public String csvToString() {
-        return memberName + "," + activities + "," + memberAge + "," + isStudying + "," + memberNumber + "," + eMail;
+        return memberName + "," + activities + "," + membership + "," + memberAge + "," + isStudying + "," + memberNumber + "," + eMail;
     }
 }
