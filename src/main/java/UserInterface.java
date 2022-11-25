@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -41,38 +42,43 @@ public class UserInterface {
 
         controller.loadDB();
 
-        while(true) {
-            System.out.println("""
-                1. Registrer et medlem
-                2. Se alle medlemmer
-                3. Ændrer oplysninger om et medlem
-                4. Slet et medlem
-                5. Gem alle medlemmer
-                9. Tilbage til hovedmenuen
-                """);
-            switch (readInt()) {
-                case 1:
-                    addMemberToDatabase();
-                    break;
-                case 2:
-                    controller.printDB();
-                    break;
-                case 3:
-                    editMember();
-                    break;
-                case 4:
-                    removeMember();
-                    break;
-                case 5:
-                    controller.saveToDB();
-                    break;
-                case 9:
-                    start();
-                    break;
-                default:
-                    System.out.println("Dit input er ikke gyldigt, indtast et af de følgende tal");
-                    break;
+        try {
+
+            while (true) {
+                System.out.println("""
+                        1. Registrer et medlem
+                        2. Se alle medlemmer
+                        3. Ændrer oplysninger om et medlem
+                        4. Slet et medlem
+                        5. Gem alle medlemmer
+                        9. Tilbage til hovedmenuen
+                        """);
+                switch (readInt()) {
+                    case 1:
+                        addMemberToDatabase();
+                        break;
+                    case 2:
+                        controller.printDB();
+                        break;
+                    case 3:
+                        editMember();
+                        break;
+                    case 4:
+                        removeMember();
+                        break;
+                    case 5:
+                        controller.saveToDB();
+                        break;
+                    case 9:
+                        start();
+                        break;
+                    default:
+                        System.out.println("Dit input er ikke gyldigt, indtast et af de følgende tal");
+                        break;
+                }
             }
+        } catch(NullPointerException npe) {
+
         }
     }
 
@@ -85,8 +91,9 @@ public class UserInterface {
             System.out.println("Du har registreret følgende navn: " + memberName);
             System.out.println(" ");
 
-            int memberNumber = sc.nextInt();
-            System.out.println("Du har registreret at medlemmets har medlems nr.: " + memberNumber);
+            System.out.println("Skriv et medlemsnummer");
+            int memberNumber = readInt();
+            System.out.println("Du har registreret at medlemmets har medlems nr: " + memberNumber + ".");
             System.out.println(" ");
 
             System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være Motionist eller Konkurrencesvømmer");
@@ -94,19 +101,16 @@ public class UserInterface {
             System.out.println("Du har registreret følgende aktivitet: " + activity);
             System.out.println(" ");
 
-            sc.nextLine();
-
-            System.out.println("Vælg hvad for en medlemskab medlemmet ønsker \n");
+            System.out.println("Vælg hvad for en medlemskab medlemmet ønsker \nEt medlem kan enten have et aktivt eller passivt medlemsskab");
             String membership = sc.nextLine();
             System.out.println("Du registreret at medlemmet har et: " + membership);
             System.out.println(" ");
 
             System.out.println("Indtast medlemmets fødselsdags dato");
-            LocalDate age = LocalDate.of(1982, 1, 1);
-            Period p1 = Period.between(LocalDate.now(), age);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
-            String memberAge = String.valueOf(formatter);
-            System.out.println("Du har registreret medlemmets fødselsdato er: " + p1.getYears() + "/" + p1.getMonths() + "/" + p1.getDays());
+            String bDay = sc.nextLine();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            int memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
+            System.out.println("Du har registreret medlemmets fødselsdato er: " + bDay);
             System.out.println(" ");
 
 
@@ -115,12 +119,12 @@ public class UserInterface {
             switch (readInt()) {
                 case 1:
                     isStudying = true;
-                    System.out.println("Du har erklæret at du er studerende");
+                    System.out.println("Du har erklæret at medlemmet er studerende");
                     System.out.println(" ");
                     break;
                 case 2:
                     isStudying = false;
-                    System.out.println("Du har erklæret at du ikke er studerende");
+                    System.out.println("Du har erklæret at medlemmet ikke er studerende");
                     System.out.println(" ");
                     break;
                 default:
@@ -134,10 +138,10 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
 
-            controller.addMember(memberName, activity, membership, age, isStudying, memberNumber, eMail);
+            controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (DateTimeException dte) {
+            System.out.println(dte.getMessage());
         }
     }
 
@@ -151,7 +155,7 @@ public class UserInterface {
             int number = sc.nextInt();
             sc.nextLine();
 
-            Svømmeklub editMember = controller.getSwimList().get(number - 1);
+            Members editMember = controller.getSwimList().get(number - 1);
             System.out.println("Du er igang med at redigere i " + editMember);
 
             //Ændring af medlemmets navn

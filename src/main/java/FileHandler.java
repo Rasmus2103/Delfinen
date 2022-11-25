@@ -7,36 +7,36 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHandler {
-    private File swimCSV = new File("src/swimlist.csv");
+    private File memberCSV = new File("src/memberlist.csv");
 
-    public void saveToDB(ArrayList <Svømmeklub> swimList) {
+    public void saveToDB(ArrayList <Members> memberList) {
         FileWriter writer;
         try {
-            writer = new FileWriter(swimCSV);
-            for (Svømmeklub s : swimList) {
+            writer = new FileWriter(memberCSV);
+            for (Members s : memberList) {
                 writer.write(s.csvToString());
                 writer.write("\n");
             }
             writer.close();
-            if(swimList.isEmpty()) {
+            if(memberList.isEmpty()) {
                 System.out.println("Ingen medlemmer blev registreret til databasen.");
             }
-            if(!swimList.isEmpty()) {
-                System.out.println(swimList.size() + " medlemmer blev registreret i databasen.");
+            if(!memberList.isEmpty()) {
+                System.out.println(memberList.size() + " medlemmer blev registreret i databasen.");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public ArrayList<Svømmeklub> loadDB() {
-        ArrayList<Svømmeklub> listOfMembers = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+    public ArrayList<Members> loadDB() {
+        ArrayList<Members> listOfMembers = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
-            Scanner sc = new Scanner(swimCSV);
+            Scanner sc = new Scanner(memberCSV);
             while(sc.hasNextLine()) {
                 String[] Strings = sc.nextLine().split(",");
-                Svømmeklub s = new Svømmeklub(
+                Members m = new Members(
                         Strings[0],
                         Strings[1],
                         Strings[2],
@@ -45,7 +45,7 @@ public class FileHandler {
                         Integer.parseInt(Strings[5]),
                         Strings[6]
                 );
-                listOfMembers.add(s);
+                listOfMembers.add(m);
             }
             sc.close();
             if (listOfMembers.isEmpty()) {

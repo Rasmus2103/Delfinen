@@ -11,27 +11,27 @@ public class Controller {
         database.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
     }
 
-    public ArrayList<Svømmeklub> showSwimList() {
-         return getSwimList();
+    public ArrayList<Members> showSwimList() {
+         return database.showSwimList();
     }
 
-    public ArrayList<Svømmeklub> getSwimList() {
+    public ArrayList<Members> getSwimList() {
         return database.getSwimList();
     }
 
     public void removeMember(int number) {
-        database.swimList.remove(number);
+        database.removeMember(number);
     }
 
-    public ArrayList<Svømmeklub> searchByName(String searchMemberName) {
+    public ArrayList<Members> searchByMemberName(String searchMemberName) {
         return database.searchByMemberName(searchMemberName);
     }
 
-    public ArrayList<Svømmeklub> searchByActivities(String searchActivity) {
+    public ArrayList<Members> searchByActivities(String searchActivity) {
         return database.searchByActivities(searchActivity);
     }
 
-    public ArrayList<Svømmeklub> searchByMembership(String searchMembership) {
+    public ArrayList<Members> searchByMembership(String searchMembership) {
         return database.searchByMembership(searchMembership);
     }
 
@@ -47,5 +47,4 @@ public class Controller {
     public void saveToDB() {
         fileHandler.saveToDB(database.getSwimList());
     }
-
 }
