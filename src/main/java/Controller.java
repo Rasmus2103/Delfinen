@@ -7,7 +7,7 @@ public class Controller {
     FileHandler fileHandler = new FileHandler();
 
 
-    public void addMember(String memberName, String activities, String memberShip, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
         database.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
     }
 

@@ -35,12 +35,12 @@ public class FileHandler {
         try {
             Scanner sc = new Scanner(memberCSV);
             while(sc.hasNextLine()) {
-                String[] Strings = sc.nextLine().split(",");
+                String[] Strings = sc.nextLine().split(";");
                 Members m = new Members(
                         Strings[0],
                         Strings[1],
                         Strings[2],
-                        LocalDate.parse(Strings[3], formatter),
+                        Integer.parseInt(Strings[3]),
                         Boolean.parseBoolean(Strings[4]),
                         Integer.parseInt(Strings[5]),
                         Strings[6]

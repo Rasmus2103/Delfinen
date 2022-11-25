@@ -2,8 +2,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Random;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -51,6 +49,7 @@ public class UserInterface {
                         3. Ændrer oplysninger om et medlem
                         4. Slet et medlem
                         5. Gem alle medlemmer
+                        6. Konkurrencesvømmere
                         9. Tilbage til hovedmenuen
                         """);
                 switch (readInt()) {
@@ -68,6 +67,8 @@ public class UserInterface {
                         break;
                     case 5:
                         controller.saveToDB();
+                        break;
+                    case 6:
                         break;
                     case 9:
                         start();

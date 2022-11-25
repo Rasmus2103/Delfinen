@@ -7,7 +7,7 @@ public class Svømmeklub implements Serializable {
 
     ArrayList<Members> memberList = new ArrayList<>();
 
-    public void addMember(String memberName, String activities, String memberShip, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
         memberList.add(new Members(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail));
     }
 
@@ -48,7 +48,7 @@ public class Svømmeklub implements Serializable {
         return searchList;
     }
 
-    public ArrayList<Members> searchByMemberAge(LocalDate searchMemberAge) {
+    public ArrayList<Members> searchByMemberAge(int searchMemberAge) {
         ArrayList<Members> searchList = new ArrayList<>();
         for (Members memberAgeSearch : memberList) {
             if (memberAgeSearch.getMemberAge() == searchMemberAge) {

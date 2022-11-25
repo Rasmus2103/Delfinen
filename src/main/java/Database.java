@@ -6,7 +6,7 @@ public class Database {
 
     Svømmeklub svømmeklub = new Svømmeklub();
 
-    public void addMember(String memberName, String activities, String memberShip, LocalDate memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
         svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
     }
 
@@ -35,7 +35,7 @@ public class Database {
     }
 
     public void printDB() {
-        System.out.println("The following heroes was found:");
+        System.out.println("Følgende medlemmer er registreret i databasen:");
         for (Members s : svømmeklub.memberList) {
             System.out.println(s);
         }
