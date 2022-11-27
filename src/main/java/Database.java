@@ -41,6 +41,11 @@ public class Database {
         }
     }
 
+    public boolean isMemberNumberTaken(int newMemberNumber){
+        return svømmeklub.isMemberNumberTaken(newMemberNumber);
+    }
+
+
     public void setSwimList(ArrayList<Members> memberList) {
         this.svømmeklub.memberList = memberList;
     }

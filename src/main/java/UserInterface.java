@@ -2,6 +2,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -94,6 +95,11 @@ public class UserInterface {
 
             System.out.println("Skriv et medlemsnummer");
             int memberNumber = readInt();
+            while (controller.isMemberNumberTaken(memberNumber)){
+                System.out.println("Dette nummer er dsv ikke tilgængeligt, prøv et andet");
+                memberNumber = readInt();
+            }
+
             System.out.println("Du har registreret at medlemmets har medlems nr: " + memberNumber + ".");
             System.out.println(" ");
 
