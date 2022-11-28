@@ -47,4 +47,8 @@ public class Controller {
     public void saveToDB() {
         fileHandler.saveToDB(database.getSwimList());
     }
+
+    public boolean isMemberNumberTaken(int newMemberNumber){
+        return database.isMemberNumberTaken(newMemberNumber);
+    }
 }

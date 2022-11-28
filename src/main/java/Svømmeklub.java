@@ -102,6 +102,20 @@ public class Svømmeklub implements Serializable {
         return " ";
     }
 
+    public boolean isMemberNumberTaken(int newMemberNumber){
+        ArrayList<Integer> memberNumberList = new ArrayList<>();
+        for (Members member : memberList) {
+            memberNumberList.add(member.getMemberNumber());
+        }
+
+        if (memberNumberList.contains(newMemberNumber)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     public void printDB () {
         System.out.println("Følgende medlemmer blev fundet: ");
