@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -6,8 +7,8 @@ public class Svømmeklub {
 
     ArrayList<Members> memberList = new ArrayList<>();
 
-    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
-        memberList.add(new Members(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail));
+    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+        memberList.add(new Members(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
     }
 
     /*public void addMemberToDatabase(Svømmeklub member) {
@@ -101,26 +102,44 @@ public class Svømmeklub {
         return " ";
     }
 
-    public boolean isMemberNumberTaken(int newMemberNumber){
+    public boolean isMemberNumberTaken(int newMemberNumber) {
         ArrayList<Integer> memberNumberList = new ArrayList<>();
-        for (Members member : memberList) {
-            memberNumberList.add(member.getMemberNumber());
-        }
+        try {
 
-        if (memberNumberList.contains(newMemberNumber)){
-            return true;
-        }
-        else {
+
+            for (Members member : memberList) {
+                memberNumberList.add(member.getMemberNumber());
+            }
+
+            if (memberNumberList.contains(newMemberNumber)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NullPointerException nullPointerException) {
             return false;
         }
     }
 
 
-    public void printDB () {
+    public void printDB() {
         System.out.println("Følgende medlemmer blev fundet: ");
         for (int i = 0; i < memberList.size(); i++) {
             System.out.println(i + 1 + ": " + memberList.get(i));
         }
+    }
+
+    public boolean checkAndUpdateAge() {
+        boolean ageUpdated = false;
+        ArrayList<Members> swimList = getSwimList();
+        for (Members member : swimList) {
+            int memberAge = Period.between(member.getBirthday(), LocalDate.now()).getYears();
+            if (memberAge > member.getMemberAge()) {
+                member.setMemberAge(memberAge);
+                ageUpdated = true;
+            }
+        }
+        return ageUpdated;
     }
 
     public ArrayList<Members> getSwimList() {

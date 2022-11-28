@@ -6,8 +6,8 @@ public class Controller {
     Svømmeklub svømmeklub = new Svømmeklub();
     FileHandler fileHandler = new FileHandler();
 
-    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
-        svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
+    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+        svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
     }
 
     public ArrayList<Members> showSwimList() {
@@ -52,5 +52,9 @@ public class Controller {
 
     public void setSwimList(ArrayList<Members> memberList) {
         this.svømmeklub.memberList = memberList;
+    }
+
+    public boolean checkAndUpdateAge (){
+        return svømmeklub.checkAndUpdateAge();
     }
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Members {
@@ -73,6 +74,8 @@ public class Members {
         return eMail;
     }
 
+    public LocalDate getBirthday(){return birthday;}
+
     /*public int getSubsription() {
         return subsription;
     }*/
@@ -107,6 +110,8 @@ public class Members {
         this.eMail = eMail;
     }
 
+    public void setBirthday(LocalDate birthday) {this.birthday = birthday;}
+
     /*public void setSubsription(int subsription) {
         this.subsription = subsription;
     }*/
@@ -126,10 +131,11 @@ public class Members {
                 ", isStudying=" + text +
                 ", memberNumber=" + memberNumber +
                 ", eMail='" + eMail + '\'' +
+                ", birthday='" + birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + '\'' +
                 '}';
     }
 
     public String csvToString() {
-        return memberName + ";" + activities + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail;
+        return memberName + ";" + activities + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
     }
 }

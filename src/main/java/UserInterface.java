@@ -10,10 +10,14 @@ public class UserInterface {
     Scanner sc = new Scanner(System.in);
 
     Controller controller = new Controller();
-
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public void start() {
         System.out.println("Velkommen til Delfinens administrative system");
         System.out.println("Vælg om du er enten Formand eller Træner");
+        controller.loadDB();
+        if (controller.checkAndUpdateAge())
+            System.out.println("Alder på medlem er blevet opdateret HUSK at gemme! ");
+
 
         while(true) {
             System.out.println("""
@@ -39,7 +43,6 @@ public class UserInterface {
     public void formand() {
         System.out.println("Velkommen Formand, vælg en af følgende muligheder her");
 
-        controller.loadDB();
 
         try {
 
@@ -112,7 +115,8 @@ public class UserInterface {
 
             System.out.println("Indtast medlemmets fødselsdags dato");
             String bDay = sc.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate dateOfBirth = LocalDate.parse(bDay, formatter);
+
             int memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
             System.out.println("Du har registreret medlemmets fødselsdato er: " + bDay);
             System.out.println(" ");
@@ -142,7 +146,7 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
 
-            controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail);
+            controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
         } catch (DateTimeException dte) {
             System.out.println(dte.getMessage());

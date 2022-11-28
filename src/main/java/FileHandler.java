@@ -31,7 +31,6 @@ public class FileHandler {
 
     public ArrayList<Members> loadDB() {
         ArrayList<Members> listOfMembers = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             Scanner sc = new Scanner(memberCSV);
             while(sc.hasNextLine()) {
@@ -43,7 +42,8 @@ public class FileHandler {
                         Integer.parseInt(Strings[3]),
                         Boolean.parseBoolean(Strings[4]),
                         Integer.parseInt(Strings[5]),
-                        Strings[6]
+                        Strings[6],
+                        LocalDate.parse(Strings[7])
                         /*Integer.parseInt(Strings[7])*/
                 );
                 listOfMembers.add(m);
