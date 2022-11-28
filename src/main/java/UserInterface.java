@@ -16,7 +16,7 @@ public class UserInterface {
         System.out.println("Vælg om du er enten Formand eller Træner");
         controller.loadDB();
         if (controller.checkAndUpdateAge())
-            System.out.println("Alder på medlem er blevet opdateret HUSK at gemme! ");
+            System.out.println("\u001B[31m"+ "Alder på medlem er blevet opdateret HUSK at gemme! " + "\u001B[0m");
 
 
         while(true) {
