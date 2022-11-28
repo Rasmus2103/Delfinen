@@ -44,6 +44,7 @@ public class FileHandler {
                         Boolean.parseBoolean(Strings[4]),
                         Integer.parseInt(Strings[5]),
                         Strings[6]
+                        /*Integer.parseInt(Strings[7])*/
                 );
                 listOfMembers.add(m);
             }

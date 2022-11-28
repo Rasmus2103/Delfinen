@@ -2,53 +2,55 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
-    Database database = new Database();
 
+    Svømmeklub svømmeklub = new Svømmeklub();
     FileHandler fileHandler = new FileHandler();
 
-
     public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail) {
-        database.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
+        svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail);
     }
 
     public ArrayList<Members> showSwimList() {
-         return database.showSwimList();
+        return svømmeklub.getSwimList();
     }
 
     public ArrayList<Members> getSwimList() {
-        return database.getSwimList();
+        return svømmeklub.getSwimList();
     }
 
     public void removeMember(int number) {
-        database.removeMember(number);
+        svømmeklub.memberList.remove(number);
     }
 
     public ArrayList<Members> searchByMemberName(String searchMemberName) {
-        return database.searchByMemberName(searchMemberName);
+        return svømmeklub.searchByMemberName(searchMemberName);
     }
 
     public ArrayList<Members> searchByActivities(String searchActivity) {
-        return database.searchByActivities(searchActivity);
+        return svømmeklub.searchByActivities(searchActivity);
     }
 
     public ArrayList<Members> searchByMembership(String searchMembership) {
-        return database.searchByMembership(searchMembership);
+        return svømmeklub.searchByMembership(searchMembership);
     }
 
-
     public void loadDB() {
-        database.setSwimList(fileHandler.loadDB());
+        setSwimList(fileHandler.loadDB());
     }
 
     public void printDB() {
-        database.printDB();
+        svømmeklub.printDB();
     }
 
     public void saveToDB() {
-        fileHandler.saveToDB(database.getSwimList());
+        fileHandler.saveToDB(svømmeklub.getSwimList());
     }
 
     public boolean isMemberNumberTaken(int newMemberNumber){
-        return database.isMemberNumberTaken(newMemberNumber);
+        return svømmeklub.isMemberNumberTaken(newMemberNumber);
+    }
+
+    public void setSwimList(ArrayList<Members> memberList) {
+        this.svømmeklub.memberList = memberList;
     }
 }

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Members {
@@ -5,13 +6,15 @@ public class Members {
     private String activities;
     private String membership;
     private int memberAge;
+    private LocalDate birthday;
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
+    //private int subsription;
 
 
     //Konstruktør
-    public Members(String memberName, String activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail) {
+    public Members(String memberName, String activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -19,6 +22,19 @@ public class Members {
         this.isStudying = isStudying;
         this.memberNumber = memberNumber;
         this.eMail = eMail;
+        //this.subsription = subsription;
+    }
+
+    public Members(String memberName, String activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
+        this.memberName = memberName;
+        this.activities = activities;
+        this.membership = membership;
+        this.memberAge = memberAge;
+        this.isStudying = isStudying;
+        this.memberNumber = memberNumber;
+        this.eMail = eMail;
+        //this.subsription = subsription;
+        this.birthday = birthday;
     }
 
     public Members() {
@@ -57,6 +73,10 @@ public class Members {
         return eMail;
     }
 
+    /*public int getSubsription() {
+        return subsription;
+    }*/
+
 
     //setter
     public void setmemberName(String memberName) {
@@ -86,6 +106,10 @@ public class Members {
     public void seteMail(String eMail){
         this.eMail = eMail;
     }
+
+    /*public void setSubsription(int subsription) {
+        this.subsription = subsription;
+    }*/
 
     @Override
     public String toString() {

@@ -1,9 +1,8 @@
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Svømmeklub implements Serializable {
+public class Svømmeklub {
 
     ArrayList<Members> memberList = new ArrayList<>();
 
@@ -15,8 +14,8 @@ public class Svømmeklub implements Serializable {
         Database.add(member);
     }*/
 
-    private static void add(Svømmeklub member) {
-    }
+    /*private static void add(Svømmeklub member) {
+    }*/
 
     public ArrayList<Members> searchByMemberName(String searchName) {
         ArrayList<Members> searchList = new ArrayList<>();
@@ -119,8 +118,8 @@ public class Svømmeklub implements Serializable {
 
     public void printDB () {
         System.out.println("Følgende medlemmer blev fundet: ");
-        for (Members s : memberList) {
-            System.out.println(s);
+        for (int i = 0; i < memberList.size(); i++) {
+            System.out.println(i + 1 + ": " + memberList.get(i));
         }
     }
 

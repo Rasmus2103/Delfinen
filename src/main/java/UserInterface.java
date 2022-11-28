@@ -50,7 +50,6 @@ public class UserInterface {
                         3. Ændrer oplysninger om et medlem
                         4. Slet et medlem
                         5. Gem alle medlemmer
-                        6. Konkurrencesvømmere
                         9. Tilbage til hovedmenuen
                         """);
                 switch (readInt()) {
@@ -68,8 +67,6 @@ public class UserInterface {
                         break;
                     case 5:
                         controller.saveToDB();
-                        break;
-                    case 6:
                         break;
                     case 9:
                         start();
@@ -110,7 +107,7 @@ public class UserInterface {
 
             System.out.println("Vælg hvad for en medlemskab medlemmet ønsker \nEt medlem kan enten have et aktivt eller passivt medlemsskab");
             String membership = sc.nextLine();
-            System.out.println("Du registreret at medlemmet har et: " + membership);
+            System.out.println("Du registreret at medlemmet har et: " + membership + " medlemsskab");
             System.out.println(" ");
 
             System.out.println("Indtast medlemmets fødselsdags dato");
@@ -231,6 +228,10 @@ public class UserInterface {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Der er ingen medlemmer med dette nummer \n Vender tilbage til hovedmenuen");
         }
+    }
+
+    public void under18(int subsription) {
+        ArrayList<Members> members = new ArrayList<>();
     }
 
     private int readInt() {
