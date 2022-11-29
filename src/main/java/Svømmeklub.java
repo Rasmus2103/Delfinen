@@ -1,14 +1,14 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Svømmeklub {
 
-    ArrayList<Members> memberList = new ArrayList<>();
+    //TODO lav memberlist private
+    ArrayList<Member> memberList = new ArrayList<>();
 
     public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        memberList.add(new Members(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
+        memberList.add(new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
     }
 
     /*public void addMemberToDatabase(Svømmeklub member) {
@@ -18,9 +18,9 @@ public class Svømmeklub {
     /*private static void add(Svømmeklub member) {
     }*/
 
-    public ArrayList<Members> searchByMemberName(String searchName) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members nameSearch : memberList) {
+    public ArrayList<Member> searchByMemberName(String searchName) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member nameSearch : memberList) {
             if (nameSearch.getmemberName().toLowerCase().contains(searchName.toLowerCase())) {
                 searchList.add(nameSearch);
             }
@@ -28,9 +28,9 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByActivities(boolean searchActivity) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members activitySearch : memberList) {
+    public ArrayList<Member> searchByActivities(boolean searchActivity) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member activitySearch : memberList) {
             if (activitySearch.getActivities() == searchActivity) {
                 searchList.add(activitySearch);
             }
@@ -38,9 +38,9 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByMembership(String searchMembership) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members membershipSearch : memberList) {
+    public ArrayList<Member> searchByMembership(String searchMembership) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member membershipSearch : memberList) {
             if (membershipSearch.getMembership().toLowerCase().contains(searchMembership.toLowerCase())) {
                 searchList.add(membershipSearch);
             }
@@ -48,9 +48,9 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByMemberAge(int searchMemberAge) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members memberAgeSearch : memberList) {
+    public ArrayList<Member> searchByMemberAge(int searchMemberAge) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member memberAgeSearch : memberList) {
             if (memberAgeSearch.getMemberAge() == searchMemberAge) {
                 searchList.add(memberAgeSearch);
             }
@@ -58,9 +58,9 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByStudying(boolean searchStudying) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members memberStudying : memberList) {
+    public ArrayList<Member> searchByStudying(boolean searchStudying) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member memberStudying : memberList) {
             if (memberStudying.getisStudying() == searchStudying) {
                 searchList.add(memberStudying);
             }
@@ -68,9 +68,9 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByEmail(String searchEmail) {
-        ArrayList<Members> searchList = new ArrayList<>();
-        for (Members memberEmailSearch : memberList) {
+    public ArrayList<Member> searchByEmail(String searchEmail) {
+        ArrayList<Member> searchList = new ArrayList<>();
+        for (Member memberEmailSearch : memberList) {
             if (memberEmailSearch.geteMail().toLowerCase().contains(searchEmail.toLowerCase())) {
                 searchList.add(memberEmailSearch);
             }
@@ -90,7 +90,7 @@ public class Svømmeklub {
 
     public String searchSvømmeklub(String searchQuery) {
         boolean isPresent = false;
-        for (Members member : memberList) {
+        for (Member member : memberList) {
             if (member.getmemberName().toLowerCase().contains(searchQuery.toLowerCase())) {
                 System.out.println(member);
                 isPresent = true;
@@ -105,7 +105,7 @@ public class Svømmeklub {
     public boolean isMemberNumberTaken(int newMemberNumber) {
         ArrayList<Integer> memberNumberList = new ArrayList<>();
         try {
-            for (Members member : memberList) {
+            for (Member member : memberList) {
                 memberNumberList.add(member.getMemberNumber());
             }
 
@@ -129,8 +129,8 @@ public class Svømmeklub {
 
     public boolean checkAndUpdateAge() {
         boolean ageUpdated = false;
-        ArrayList<Members> swimList = getSwimList();
-        for (Members member : swimList) {
+        ArrayList<Member> swimList = getSwimList();
+        for (Member member : swimList) {
             int memberAge = Period.between(member.getBirthday(), LocalDate.now()).getYears();
             if (memberAge > member.getMemberAge()) {
                 member.setMemberAge(memberAge);
@@ -140,7 +140,7 @@ public class Svømmeklub {
         return ageUpdated;
     }
 
-    public ArrayList<Members> getSwimList() {
+    public ArrayList<Member> getSwimList() {
         return memberList;
     }
 }

@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class FileHandler {
     private File memberCSV = new File("src/memberlist.csv");
 
-    public void saveToDB(ArrayList <Members> memberList) {
+    public void saveToDB(ArrayList <Member> memberList) {
         FileWriter writer;
         try {
             writer = new FileWriter(memberCSV);
-            for (Members s : memberList) {
+            for (Member s : memberList) {
                 writer.write(s.csvToString());
                 writer.write("\n");
             }
@@ -29,13 +29,13 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<Members> loadDB() {
-        ArrayList<Members> listOfMembers = new ArrayList<>();
+    public ArrayList<Member> loadDB() {
+        ArrayList<Member> listOfMembers = new ArrayList<>();
         try {
             Scanner sc = new Scanner(memberCSV);
             while(sc.hasNextLine()) {
                 String[] Strings = sc.nextLine().split(";");
-                Members m = new Members(
+                Member m = new Member(
                         Strings[0],
                         Boolean.parseBoolean(Strings[1]),
                         Strings[2],

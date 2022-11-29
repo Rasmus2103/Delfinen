@@ -32,6 +32,9 @@ public class UserInterface {
                 case 1:
                     formand();
                     break;
+                case 2:
+                    coach();
+                    break;
                 case 9:
                     System.out.println("Lukker for systemet");
                     System.exit(0);
@@ -41,6 +44,13 @@ public class UserInterface {
                     break;
             }
         }
+    }
+
+    private void coach() {
+        System.out.println("Velkommen Træner, vælg en af følgende muligheder her");
+
+        Coach coach = new Coach("Børge");
+        Team juniorTeam = new Team(true, coach);
     }
 
     public void formand() {
@@ -189,7 +199,7 @@ public class UserInterface {
             int number = sc.nextInt();
             sc.nextLine();
 
-            Members editMember = controller.getSwimList().get(number - 1);
+            Member editMember = controller.getSwimList().get(number - 1);
             System.out.println("Du er igang med at redigere i " + editMember);
 
             //Ændring af medlemmets navn
@@ -222,6 +232,8 @@ public class UserInterface {
             String memberNewMembership = sc.nextLine();
             if (!memberNewMembership.trim().isEmpty())
                 editMember.setMembership(memberNewMembership);
+
+
 
             //Ændring om medlemmet studerer eller ej
             System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
@@ -271,7 +283,7 @@ public class UserInterface {
     }
 
     public void under18(int subsription) {
-        ArrayList<Members> members = new ArrayList<>();
+        ArrayList<Member> members = new ArrayList<>();
     }
 
     private int readInt() {

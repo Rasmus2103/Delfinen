@@ -1,8 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
-public class Members {
+public class Member {
     private String memberName;
     private boolean activities;
     private String membership;
@@ -15,7 +14,7 @@ public class Members {
 
 
     //Konstruktør
-    public Members(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
+    public Member(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -26,7 +25,7 @@ public class Members {
         //this.subsription = subsription;
     }
 
-    public Members(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
+    public Member(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -38,7 +37,7 @@ public class Members {
         this.birthday = birthday;
     }
 
-    public Members() {
+    public Member() {
 
     }
 
@@ -110,7 +109,9 @@ public class Members {
         this.eMail = eMail;
     }
 
-    public void setBirthday(LocalDate birthday) {this.birthday = birthday;}
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 
     /*public void setSubsription(int subsription) {
         this.subsription = subsription;

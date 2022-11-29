@@ -10,11 +10,11 @@ public class Controller {
         svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
     }
 
-    public ArrayList<Members> showSwimList() {
+    public ArrayList<Member> showSwimList() {
         return svømmeklub.getSwimList();
     }
 
-    public ArrayList<Members> getSwimList() {
+    public ArrayList<Member> getSwimList() {
         return svømmeklub.getSwimList();
     }
 
@@ -22,15 +22,15 @@ public class Controller {
         svømmeklub.memberList.remove(number);
     }
 
-    public ArrayList<Members> searchByMemberName(String searchMemberName) {
+    public ArrayList<Member> searchByMemberName(String searchMemberName) {
         return svømmeklub.searchByMemberName(searchMemberName);
     }
 
-    public ArrayList<Members> searchByActivities(boolean searchActivity) {
+    public ArrayList<Member> searchByActivities(boolean searchActivity) {
         return svømmeklub.searchByActivities(searchActivity);
     }
 
-    public ArrayList<Members> searchByMembership(String searchMembership) {
+    public ArrayList<Member> searchByMembership(String searchMembership) {
         return svømmeklub.searchByMembership(searchMembership);
     }
 
@@ -50,7 +50,7 @@ public class Controller {
         return svømmeklub.isMemberNumberTaken(newMemberNumber);
     }
 
-    public void setSwimList(ArrayList<Members> memberList) {
+    public void setSwimList(ArrayList<Member> memberList) {
         this.svømmeklub.memberList = memberList;
     }
 
