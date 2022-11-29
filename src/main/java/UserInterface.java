@@ -2,8 +2,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class UserInterface {
 
@@ -13,7 +15,7 @@ public class UserInterface {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public void start() {
         System.out.println("Velkommen til Delfinens administrative system");
-        System.out.println("Vælg om du er enten Formand eller Træner");
+        System.out.println("Vælg udfra hvilken rolle du har i klubben");
         controller.loadDB();
         if (controller.checkAndUpdateAge())
             System.out.println("\u001B[31m"+ "Alder på medlem er blevet opdateret HUSK at gemme! " + "\u001B[0m");
@@ -23,6 +25,7 @@ public class UserInterface {
             System.out.println("""
                     1. Formand
                     2. Træner
+                    3. Kasserer
                     9. Forlad programmet
                     """);
             switch(readInt()) {
@@ -103,10 +106,24 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets har medlems nr: " + memberNumber + ".");
             System.out.println(" ");
 
-            System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være Motionist eller Konkurrencesvømmer");
-            String activity = sc.nextLine();
-            System.out.println("Du har registreret følgende aktivitet: " + activity);
-            System.out.println(" ");
+            System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være (1)Konkurrencesvømmer eller (2)Motionistsvømmer");
+            boolean activity = true;
+            switch (readInt()) {
+                case 1:
+                    activity = true;
+                    System.out.println("Du har sagt at medlemmet er Konkurrencesvømmer");
+                    System.out.println(" ");
+                    break;
+                case 2:
+                    activity = false;
+                    System.out.println("Du har sagt at medlemmet er Motionistsvømmer");
+                    System.out.println(" ");
+                    break;
+                default:
+                    System.out.println("Dit input er ikke gyldigt, indtast et af de gyldige numre");
+                    System.out.println(" ");
+                    break;
+            }
 
             System.out.println("Vælg hvad for en medlemskab medlemmet ønsker \nEt medlem kan enten have et aktivt eller passivt medlemsskab");
             String membership = sc.nextLine();
@@ -115,9 +132,18 @@ public class UserInterface {
 
             System.out.println("Indtast medlemmets fødselsdags dato");
             String bDay = sc.nextLine();
-            LocalDate dateOfBirth = LocalDate.parse(bDay, formatter);
+            LocalDate dateOfBirth;
+            int memberAge;
+            try {
+                 dateOfBirth = LocalDate.parse(bDay, formatter);
+                 //memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
+            } catch (DateTimeParseException e) {
+                System.out.println("Du skal sørge for at indtaste i det rigtige format, dd-MM-yyyy");
+                bDay = sc.nextLine();
+                dateOfBirth = LocalDate.parse(bDay, formatter);
+            }
+            memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
 
-            int memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
             System.out.println("Du har registreret medlemmets fødselsdato er: " + bDay);
             System.out.println(" ");
 
@@ -148,8 +174,8 @@ public class UserInterface {
 
             controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
-        } catch (DateTimeException dte) {
-            System.out.println(dte.getMessage());
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 
@@ -175,10 +201,20 @@ public class UserInterface {
 
             //Ændring af medlemmets aktivitetsform
             System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
-            System.out.println("Du er igang med at redigere: " + editMember.getActivities());
-            String memberNewActivity = sc.nextLine();
-            if (!memberNewActivity.isEmpty())
-                editMember.setActivities(memberNewActivity);
+            System.out.println("Du er igang med at redigere om medlemmet er Konkurrencesvømmer eller Motionistsvømmer: " +
+                    "\nTast 1 og tryk ENTER hvis medlemmet er Konkurrencesvømmer. " +
+                    "\nTast 2 og tryk ENTER hvis medlemmet ikke er Motionistsvømmer" +
+                    "\nTast 3 og tryk ENTER hvis der ikke skal redigeres");
+            int memberCompetitorOrNot = readInt();
+            if (memberCompetitorOrNot == 1) {
+                editMember.setisStudying(true);
+            } else if (memberCompetitorOrNot == 2) {
+                editMember.setisStudying(false);
+            } else if (memberCompetitorOrNot == 3) {
+                System.out.println("Ingen videre ændring");
+            } else {
+                System.out.println("Input ikke gyldigt, der er ikke sket en ændring");
+            }
 
             //Ændring af medlemmets medlemsskab
             System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");

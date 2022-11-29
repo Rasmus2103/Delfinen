@@ -6,7 +6,7 @@ public class Controller {
     Svømmeklub svømmeklub = new Svømmeklub();
     FileHandler fileHandler = new FileHandler();
 
-    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+    public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
         svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
     }
 
@@ -26,7 +26,7 @@ public class Controller {
         return svømmeklub.searchByMemberName(searchMemberName);
     }
 
-    public ArrayList<Members> searchByActivities(String searchActivity) {
+    public ArrayList<Members> searchByActivities(boolean searchActivity) {
         return svømmeklub.searchByActivities(searchActivity);
     }
 

@@ -7,7 +7,7 @@ public class Svømmeklub {
 
     ArrayList<Members> memberList = new ArrayList<>();
 
-    public void addMember(String memberName, String activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+    public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
         memberList.add(new Members(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
     }
 
@@ -28,10 +28,10 @@ public class Svømmeklub {
         return searchList;
     }
 
-    public ArrayList<Members> searchByActivities(String searchActivity) {
+    public ArrayList<Members> searchByActivities(boolean searchActivity) {
         ArrayList<Members> searchList = new ArrayList<>();
         for (Members activitySearch : memberList) {
-            if (activitySearch.getActivities().toLowerCase().contains(searchActivity.toLowerCase())) {
+            if (activitySearch.getActivities() == searchActivity) {
                 searchList.add(activitySearch);
             }
         }
@@ -105,8 +105,6 @@ public class Svømmeklub {
     public boolean isMemberNumberTaken(int newMemberNumber) {
         ArrayList<Integer> memberNumberList = new ArrayList<>();
         try {
-
-
             for (Members member : memberList) {
                 memberNumberList.add(member.getMemberNumber());
             }

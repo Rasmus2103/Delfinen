@@ -37,7 +37,7 @@ public class FileHandler {
                 String[] Strings = sc.nextLine().split(";");
                 Members m = new Members(
                         Strings[0],
-                        Strings[1],
+                        Boolean.parseBoolean(Strings[1]),
                         Strings[2],
                         Integer.parseInt(Strings[3]),
                         Boolean.parseBoolean(Strings[4]),

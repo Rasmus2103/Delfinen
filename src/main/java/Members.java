@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Members {
     private String memberName;
-    private String activities;
+    private boolean activities;
     private String membership;
     private int memberAge;
     private LocalDate birthday;
@@ -15,7 +15,7 @@ public class Members {
 
 
     //Konstruktør
-    public Members(String memberName, String activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
+    public Members(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -26,7 +26,7 @@ public class Members {
         //this.subsription = subsription;
     }
 
-    public Members(String memberName, String activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
+    public Members(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
         this.memberName = memberName;
         this.activities = activities;
         this.membership = membership;
@@ -50,7 +50,7 @@ public class Members {
         return memberName;
     }
 
-    public String getActivities() {
+    public boolean getActivities() {
         return activities;
     }
 
@@ -86,7 +86,7 @@ public class Members {
         this.memberName = memberName;
     }
 
-    public void setActivities(String activities) {
+    public void setActivities(boolean activities) {
         this.activities = activities;
     }
 
@@ -123,9 +123,14 @@ public class Members {
             text = "Studerende";
         else
             text = "Ikke studerende";
+        String text2;
+        if(activities)
+            text2 = "Konkurrencesvømmer";
+        else
+            text2 = "Motionistsvømmer";
         return "Members{" +
                 "memberName='" + memberName + '\'' +
-                ", activities='" + activities + '\'' +
+                ", activities='" + text2 + '\'' +
                 ", membership='" + membership + '\'' +
                 ", memberAge=" + memberAge +
                 ", isStudying=" + text +
@@ -136,6 +141,16 @@ public class Members {
     }
 
     public String csvToString() {
-        return memberName + ";" + activities + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
+        String text;
+        if(isStudying)
+            text = "Studerende";
+        else
+            text = "Ikke Studerende";
+        String text2;
+        if(activities)
+            text2 = "Konkurrencesvømmer";
+        else
+            text2 = "Motionistsvømmer";
+        return memberName + ";" + text2 + ";" + membership + ";" + memberAge + ";" + text + ";" + memberNumber + ";" + eMail + ";" + birthday;
     }
 }
