@@ -6,9 +6,21 @@ public class Svømmeklub {
 
     //TODO lav memberlist private
     ArrayList<Member> memberList = new ArrayList<>();
+    JuniorTeam juniorTeam;
+    SeniorTeam seniorTeam;
+
 
     public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
         memberList.add(new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
+    }
+
+    public void createJuniorTeam(Coach coach) {
+        juniorTeam = new JuniorTeam(coach);
+        //juniorTeam.addTeammemberJunior();
+    }
+
+    public void createSeniorTeam(Coach coach) {
+        seniorTeam = new SeniorTeam(coach);
     }
 
     /*public void addMemberToDatabase(Svømmeklub member) {
@@ -108,7 +120,6 @@ public class Svømmeklub {
             for (Member member : memberList) {
                 memberNumberList.add(member.getMemberNumber());
             }
-
             if (memberNumberList.contains(newMemberNumber)) {
                 return true;
             } else {

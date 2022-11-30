@@ -1,11 +1,9 @@
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.zip.DataFormatException;
 
 public class UserInterface {
 
@@ -13,13 +11,18 @@ public class UserInterface {
 
     Controller controller = new Controller();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    Coach coachJunior = new Coach("Børge");
+    Coach coachSenior = new Coach("Jens");
+
     public void start() {
         System.out.println("Velkommen til Delfinens administrative system");
         System.out.println("Vælg udfra hvilken rolle du har i klubben");
+
         controller.loadDB();
+
         if (controller.checkAndUpdateAge())
             System.out.println("\u001B[31m"+ "Alder på medlem er blevet opdateret HUSK at gemme! " + "\u001B[0m");
-
 
         while(true) {
             System.out.println("""
@@ -47,15 +50,89 @@ public class UserInterface {
     }
 
     private void coach() {
-        System.out.println("Velkommen Træner, vælg en af følgende muligheder her");
+        System.out.println("Velkommen Træner \nVælg en af følgende muligheder her");
 
-        Coach coach = new Coach("Børge");
-        Team juniorTeam = new Team(true, coach);
+        while(true) {
+            System.out.println("""
+                    1. Børge (Juniorholdet)
+                    2. Jens (Seniorholdet)
+                    9. Tilbage til hovedmenuen
+                    """);
+            switch (readInt()) {
+                case 1:
+                    coachJunior();
+                    break;
+                case 2:
+                    coachSenior();
+                    break;
+                case 9:
+                    start();
+                    break;
+                default:
+                    System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
+                    break;
+            }
+        }
+    }
+
+    public void coachJunior() {
+        System.out.println("Velkommen " + coachJunior.getName() + " tsil Juniorholdet \nVælg en af følgende valgmuligheder");
+        controller.createJuniorTeam(coachJunior);
+
+        while(true) {
+            System.out.println("""
+                    1. Registering af træningsresultat
+                    2. Registering af stævneresultat
+                    3. Se top 5 fra hver disciplin
+                    9. Tilbage til menuen
+                    """);
+            switch(readInt()) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 9:
+                    coach();
+                    break;
+                default:
+                    System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
+                    break;
+            }
+        }
+    }
+
+    private void coachSenior() {
+        System.out.println("Velkommen " + coachSenior.getName() + "til Seniorholdet \nVælg en af følgende valgmuligheder");
+        controller.createSeniorTeam(coachSenior);
+
+        while(true) {
+            System.out.println("""
+                    1. Registering af træningsresultat
+                    2. Registering af stævneresultat
+                    3. Se top 5 fra hver disciplin
+                    9. Tilbage til menuen
+                    """);
+            switch(readInt()) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 9:
+                    coach();
+                    break;
+                default:
+                    System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
+                    break;
+            }
+        }
     }
 
     public void formand() {
         System.out.println("Velkommen Formand, vælg en af følgende muligheder her");
-
 
         try {
 
@@ -282,9 +359,6 @@ public class UserInterface {
         }
     }
 
-    public void under18(int subsription) {
-        ArrayList<Member> members = new ArrayList<>();
-    }
 
     private int readInt() {
 

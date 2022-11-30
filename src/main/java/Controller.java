@@ -46,7 +46,7 @@ public class Controller {
         fileHandler.saveToDB(svømmeklub.getSwimList());
     }
 
-    public boolean isMemberNumberTaken(int newMemberNumber){
+    public boolean isMemberNumberTaken(int newMemberNumber) {
         return svømmeklub.isMemberNumberTaken(newMemberNumber);
     }
 
@@ -54,7 +54,15 @@ public class Controller {
         this.svømmeklub.memberList = memberList;
     }
 
-    public boolean checkAndUpdateAge (){
+    public boolean checkAndUpdateAge () {
         return svømmeklub.checkAndUpdateAge();
+    }
+
+    public void createJuniorTeam(Coach coach) {
+        svømmeklub.createJuniorTeam(coach);
+    }
+
+    public void createSeniorTeam(Coach coach) {
+        svømmeklub.createSeniorTeam(coach);
     }
 }
