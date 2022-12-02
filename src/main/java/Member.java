@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Member {
     private String memberName;
-    private boolean activities;
+    private boolean activity;
     private String membership;
     private int memberAge;
     private LocalDate birthday;
@@ -14,9 +14,9 @@ public class Member {
 
 
     //Konstruktør
-    public Member(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
+    public Member(String memberName, boolean activity, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
         this.memberName = memberName;
-        this.activities = activities;
+        this.activity = activity;
         this.membership = membership;
         this.memberAge = memberAge;
         this.isStudying = isStudying;
@@ -25,9 +25,9 @@ public class Member {
         //this.subsription = subsription;
     }
 
-    public Member(String memberName, boolean activities, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
+    public Member(String memberName, boolean activity, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
         this.memberName = memberName;
-        this.activities = activities;
+        this.activity = activity;
         this.membership = membership;
         this.memberAge = memberAge;
         this.isStudying = isStudying;
@@ -49,8 +49,8 @@ public class Member {
         return memberName;
     }
 
-    public boolean getActivities() {
-        return activities;
+    public boolean getActivity() {
+        return activity;
     }
 
     public String getMembership() {
@@ -85,8 +85,8 @@ public class Member {
         this.memberName = memberName;
     }
 
-    public void setActivities(boolean activities) {
-        this.activities = activities;
+    public void setActivity(boolean activity) {
+        this.activity = activity;
     }
 
     public void setMembership(String membership) {
@@ -125,7 +125,7 @@ public class Member {
         else
             text = "Ikke studerende";
         String text2;
-        if(activities)
+        if(activity)
             text2 = "Konkurrencesvømmer";
         else
             text2 = "Motionistsvømmer";
@@ -148,7 +148,7 @@ public class Member {
         else
             text = "Ikke Studerende";
         String text2;
-        if(activities)
+        if(activity)
             text2 = "Konkurrencesvømmer";
         else
             text2 = "Motionistsvømmer";

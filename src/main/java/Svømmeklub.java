@@ -6,22 +6,56 @@ public class Svømmeklub {
 
     //TODO lav memberlist private
     ArrayList<Member> memberList = new ArrayList<>();
-    JuniorTeam juniorTeam;
-    SeniorTeam seniorTeam;
+    private JuniorTeam juniorTeam;
+    private SeniorTeam seniorTeam;
+
+    Member member;
 
 
     public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        memberList.add(new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth));
+        member = new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+        memberList.add(member);
+        addTeamJunior();
     }
 
     public void createJuniorTeam(Coach coach) {
         juniorTeam = new JuniorTeam(coach);
-        //juniorTeam.addTeammemberJunior();
     }
 
     public void createSeniorTeam(Coach coach) {
         seniorTeam = new SeniorTeam(coach);
     }
+
+    public void addTeamJunior() {
+        System.out.println("addTeamJunior");
+        System.out.println(member);
+
+        try {
+            for (Member m: memberList) {
+                if(member.getMemberAge() < 18) {
+                    juniorTeam.add(m);
+                } else {
+                    seniorTeam.add(m);
+                }
+            }
+        } catch (NullPointerException npe) {
+
+        }
+
+        /*try {
+            if (member.getMemberAge() < 18) {
+                System.out.println("Kom nu!");
+                juniorTeam.add(member);
+                System.out.println(juniorTeam.getJuniorMembers());
+            }
+        } catch (NullPointerException npe) {
+
+        }*/
+    }
+
+    /*public void addTeamSenior() {
+        seniorTeam.addTeammemberSenior(member);
+    }*/
 
     /*public void addMemberToDatabase(Svømmeklub member) {
         Database.add(member);
@@ -43,7 +77,7 @@ public class Svømmeklub {
     public ArrayList<Member> searchByActivities(boolean searchActivity) {
         ArrayList<Member> searchList = new ArrayList<>();
         for (Member activitySearch : memberList) {
-            if (activitySearch.getActivities() == searchActivity) {
+            if (activitySearch.getActivity() == searchActivity) {
                 searchList.add(activitySearch);
             }
         }
@@ -151,7 +185,20 @@ public class Svømmeklub {
         return ageUpdated;
     }
 
+    public void initJuniorList() {
+
+    }
+
     public ArrayList<Member> getSwimList() {
         return memberList;
     }
+
+    public ArrayList<Member> getJuniorList() {
+        return juniorTeam.getJuniorMembers();
+    }
+
+    public ArrayList<Member> getSeniorList() {
+        return seniorTeam.getSeniorMembers();
+    }
+
 }

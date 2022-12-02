@@ -76,18 +76,21 @@ public class UserInterface {
     }
 
     public void coachJunior() {
-        System.out.println("Velkommen " + coachJunior.getName() + " tsil Juniorholdet \nVælg en af følgende valgmuligheder");
+        System.out.println("Velkommen " + coachJunior.getName() + " til Juniorholdet \nVælg en af følgende valgmuligheder");
         controller.createJuniorTeam(coachJunior);
+        controller.addTeamJunior();
 
         while(true) {
             System.out.println("""
-                    1. Registering af træningsresultat
-                    2. Registering af stævneresultat
-                    3. Se top 5 fra hver disciplin
+                    1. Se alle holdmedlemmer
+                    2. Registering af træningsresultat
+                    3. Registering af stævneresultat
+                    4. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
             switch(readInt()) {
                 case 1:
+                    seeMembersJunior();
                     break;
                 case 2:
                     break;
@@ -100,22 +103,36 @@ public class UserInterface {
                     System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
                     break;
             }
+        }
+    }
+
+    public void seeMembersJunior() {
+        System.out.println("Følgende medlemmer på Juniorholdet");
+        System.out.println(controller.getJuniorList().size());
+        for(int i = 0; i < controller.getJuniorList().size(); i++) {
+            System.out.println(controller.getJuniorList().get(i));
         }
     }
 
     private void coachSenior() {
         System.out.println("Velkommen " + coachSenior.getName() + "til Seniorholdet \nVælg en af følgende valgmuligheder");
         controller.createSeniorTeam(coachSenior);
+        //controller.addTeamSenior();
 
         while(true) {
             System.out.println("""
-                    1. Registering af træningsresultat
-                    2. Registering af stævneresultat
-                    3. Se top 5 fra hver disciplin
+                    1. Se alle holdmedlemmer
+                    2. Registering af træningsresultat
+                    3. Registering af stævneresultat
+                    4. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
             switch(readInt()) {
                 case 1:
+                    System.out.println("Følgende medlemmer på Seniorholdet");
+                    for(int i = 0; i < controller.getSeniorList().size(); i++) {
+                        System.out.println(controller.getSeniorList().get(i));
+                    }
                     break;
                 case 2:
                     break;
@@ -130,6 +147,8 @@ public class UserInterface {
             }
         }
     }
+
+
 
     public void formand() {
         System.out.println("Velkommen Formand, vælg en af følgende muligheder her");
@@ -258,7 +277,7 @@ public class UserInterface {
             String eMail = sc.nextLine();
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
-
+            System.out.println("addMember");
             controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
         } catch (Exception ignored) {
@@ -268,7 +287,7 @@ public class UserInterface {
 
     public void editMember() {
         try {
-            System.out.println("Vælg et medlem du ønsker at redigere i (Vælg ved at indtaste deres medlemsnummer): ");
+            System.out.println("Vælg et medlem du ønsker at redigere i (Vælg ved at indtaste position på listen): ");
             for (int i = 0; i < controller.getSwimList().size(); i++) {
                 System.out.println(i + 1 + ":" + controller.getSwimList().get(i));
             }

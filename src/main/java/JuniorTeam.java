@@ -13,10 +13,12 @@ public class JuniorTeam {
         return coach;
     }
 
-    public void addTeammemberJunior(Member member) {
-        if(member.getMemberAge() < 18 && member.getActivities()) {
-            juniorMembers.add(member);
-        }
+    public void add(Member m) {
+        juniorMembers.add(m);
+    }
+
+    public ArrayList<Member> getJuniorMembers() {
+        return juniorMembers;
     }
 
     @Override

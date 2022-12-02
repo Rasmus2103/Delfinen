@@ -13,10 +13,22 @@ public class SeniorTeam {
         return coach;
     }
 
-    public void addTeammemberSenior(Member member) {
-        if(member.getMemberAge() > 18 && member.getActivities()) {
-            seniorMembers.add(member);
+    public void add(Member m) {
+        seniorMembers.add(m);
+    }
+
+    /*public void addTeammemberSenior(Member member) {
+        try {
+            if (member.getMemberAge() > 18 && member.getActivity()) {
+                seniorMembers.add(member);
+            }
+        } catch (NullPointerException npe) {
+
         }
+    }*/
+
+    public ArrayList<Member> getSeniorMembers() {
+        return seniorMembers;
     }
 
     @Override

@@ -65,4 +65,20 @@ public class Controller {
     public void createSeniorTeam(Coach coach) {
         svømmeklub.createSeniorTeam(coach);
     }
+
+    public void addTeamJunior() {
+        svømmeklub.addTeamJunior();
+    }
+
+    /*public void addTeamSenior() {
+        svømmeklub.addTeamSenior();
+    }*/
+
+    public ArrayList<Member> getJuniorList() {
+        return svømmeklub.getJuniorList();
+    }
+
+    public ArrayList<Member> getSeniorList() {
+        return svømmeklub.getSeniorList();
+    }
 }
