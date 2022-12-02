@@ -1,16 +1,14 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHandler {
     private File memberCSV = new File("src/memberlist.csv");
+    FileWriter writer;
 
     public void saveToDB(ArrayList <Member> memberList) {
-        FileWriter writer;
         try {
             writer = new FileWriter(memberCSV);
             for (Member s : memberList) {
@@ -38,8 +36,8 @@ public class FileHandler {
                 Member m = new Member(
                         Strings[0],
                         Boolean.parseBoolean(Strings[1]),
-                        Strings[2],
-                        Integer.parseInt(Strings[3]),
+                        Strings[3],
+                        Integer.parseInt(Strings[2]),
                         Boolean.parseBoolean(Strings[4]),
                         Integer.parseInt(Strings[5]),
                         Strings[6],
@@ -52,6 +50,7 @@ public class FileHandler {
             if (listOfMembers.isEmpty()) {
                 System.out.println("Ingen medlemmer blev fundet i filen");
             }
+
             return listOfMembers;
         } catch (Exception e) {
             System.out.println(e.getMessage());

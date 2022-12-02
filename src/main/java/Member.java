@@ -141,7 +141,7 @@ public class Member {
                 '}';
     }
 
-    public String csvToString() {
+   /* public String csvToString() {
         String text;
         if(isStudying)
             text = "Studerende";
@@ -153,5 +153,9 @@ public class Member {
         else
             text2 = "Motionistsvømmer";
         return memberName + ";" + text2 + ";" + membership + ";" + memberAge + ";" + text + ";" + memberNumber + ";" + eMail + ";" + birthday;
+    }*/
+
+    public String csvToString() {
+        return memberName + ";" + activity + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
     }
 }

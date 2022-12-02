@@ -4,8 +4,13 @@ public class JuniorTeam {
     private Coach coach;
     private ArrayList<Member> juniorMembers;
 
-    public JuniorTeam(Coach coach) {
+    /*public JuniorTeam(Coach coach) {
         this.coach = coach;
+        juniorMembers = new ArrayList<>();
+    }*/
+
+    public JuniorTeam() {
+        coach = new Coach("Rasmus");
         juniorMembers = new ArrayList<>();
     }
 

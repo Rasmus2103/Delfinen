@@ -16,22 +16,25 @@ public class UserInterface {
     Coach coachSenior = new Coach("Jens");
 
     public void start() {
+        controller.loadDB();
+        controller.createJuniorTeam();
+        controller.createSeniorTeam();
         System.out.println("Velkommen til Delfinens administrative system");
         System.out.println("Vælg udfra hvilken rolle du har i klubben");
-
-        controller.loadDB();
 
         if (controller.checkAndUpdateAge())
             System.out.println("\u001B[31m"+ "Alder på medlem er blevet opdateret HUSK at gemme! " + "\u001B[0m");
 
-        while(true) {
+        int userChoice = 0;
+        while(userChoice != 9) {
             System.out.println("""
                     1. Formand
                     2. Træner
                     3. Kasserer
                     9. Forlad programmet
                     """);
-            switch(readInt()) {
+            userChoice = readInt();
+            switch(userChoice) {
                 case 1:
                     formand();
                     break;
@@ -51,14 +54,16 @@ public class UserInterface {
 
     private void coach() {
         System.out.println("Velkommen Træner \nVælg en af følgende muligheder her");
+        int userChoice = 0;
 
-        while(true) {
+        while(userChoice != 9) {
             System.out.println("""
                     1. Børge (Juniorholdet)
                     2. Jens (Seniorholdet)
                     9. Tilbage til hovedmenuen
                     """);
-            switch (readInt()) {
+            userChoice = readInt();
+            switch (userChoice) {
                 case 1:
                     coachJunior();
                     break;
@@ -66,7 +71,7 @@ public class UserInterface {
                     coachSenior();
                     break;
                 case 9:
-                    start();
+                    //start();
                     break;
                 default:
                     System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
@@ -77,10 +82,11 @@ public class UserInterface {
 
     public void coachJunior() {
         System.out.println("Velkommen " + coachJunior.getName() + " til Juniorholdet \nVælg en af følgende valgmuligheder");
-        controller.createJuniorTeam(coachJunior);
+        //controller.createJuniorTeam(coachJunior);
         controller.addTeamJunior();
+        int userChoice = 0;
 
-        while(true) {
+        while(userChoice != 9) {
             System.out.println("""
                     1. Se alle holdmedlemmer
                     2. Registering af træningsresultat
@@ -88,7 +94,8 @@ public class UserInterface {
                     4. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
-            switch(readInt()) {
+            userChoice = readInt();
+            switch(userChoice) {
                 case 1:
                     seeMembersJunior();
                     break;
@@ -116,10 +123,11 @@ public class UserInterface {
 
     private void coachSenior() {
         System.out.println("Velkommen " + coachSenior.getName() + "til Seniorholdet \nVælg en af følgende valgmuligheder");
-        controller.createSeniorTeam(coachSenior);
+        //controller.createSeniorTeam(coachSenior);
         //controller.addTeamSenior();
+        int userChoice = 0;
 
-        while(true) {
+        while(userChoice != 9) {
             System.out.println("""
                     1. Se alle holdmedlemmer
                     2. Registering af træningsresultat
@@ -127,12 +135,10 @@ public class UserInterface {
                     4. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
-            switch(readInt()) {
+            userChoice = readInt();
+            switch(userChoice) {
                 case 1:
-                    System.out.println("Følgende medlemmer på Seniorholdet");
-                    for(int i = 0; i < controller.getSeniorList().size(); i++) {
-                        System.out.println(controller.getSeniorList().get(i));
-                    }
+                    seeMembersSenior();
                     break;
                 case 2:
                     break;
@@ -148,14 +154,20 @@ public class UserInterface {
         }
     }
 
-
+    public void seeMembersSenior() {
+        System.out.println("Følgende medlemmer på Seniorholdet");
+        System.out.println(controller.getSeniorList().size());
+        for(int i = 0; i < controller.getSeniorList().size(); i++) {
+            System.out.println(controller.getSeniorList().get(i));
+        }
+    }
 
     public void formand() {
         System.out.println("Velkommen Formand, vælg en af følgende muligheder her");
+        int userChoice = 0;
 
         try {
-
-            while (true) {
+            while (userChoice != 9) {
                 System.out.println("""
                         1. Registrer et medlem
                         2. Se alle medlemmer
@@ -164,7 +176,8 @@ public class UserInterface {
                         5. Gem alle medlemmer
                         9. Tilbage til hovedmenuen
                         """);
-                switch (readInt()) {
+                userChoice = readInt();
+                switch (userChoice) {
                     case 1:
                         addMemberToDatabase();
                         break;
@@ -181,7 +194,7 @@ public class UserInterface {
                         controller.saveToDB();
                         break;
                     case 9:
-                        start();
+                        //start();
                         break;
                     default:
                         System.out.println("Dit input er ikke gyldigt, indtast et af de følgende tal");
@@ -213,7 +226,7 @@ public class UserInterface {
             System.out.println(" ");
 
             System.out.println("Vælg hvad for en aktivitetsform medlemmet ønsker \nMedlemmet kan enten være (1)Konkurrencesvømmer eller (2)Motionistsvømmer");
-            boolean activity = true;
+            boolean activity = false;
             switch (readInt()) {
                 case 1:
                     activity = true;
@@ -242,7 +255,6 @@ public class UserInterface {
             int memberAge;
             try {
                  dateOfBirth = LocalDate.parse(bDay, formatter);
-                 //memberAge = Period.between(LocalDate.parse(bDay, formatter), LocalDate.now()).getYears();
             } catch (DateTimeParseException e) {
                 System.out.println("Du skal sørge for at indtaste i det rigtige format, dd-MM-yyyy");
                 bDay = sc.nextLine();
@@ -255,7 +267,7 @@ public class UserInterface {
 
 
             System.out.println("Erklær om medlemmet er studerende eller ej \nTast 1 for studerende \nTast 2 for ikke studerende");
-            boolean isStudying = true;
+            boolean isStudying = false;
             switch (readInt()) {
                 case 1:
                     isStudying = true;
@@ -278,6 +290,7 @@ public class UserInterface {
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
             System.out.println("addMember");
+
             controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
         } catch (Exception ignored) {
@@ -309,13 +322,13 @@ public class UserInterface {
             System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
             System.out.println("Du er igang med at redigere om medlemmet er Konkurrencesvømmer eller Motionistsvømmer: " +
                     "\nTast 1 og tryk ENTER hvis medlemmet er Konkurrencesvømmer. " +
-                    "\nTast 2 og tryk ENTER hvis medlemmet ikke er Motionistsvømmer" +
+                    "\nTast 2 og tryk ENTER hvis medlemmet er Motionistsvømmer" +
                     "\nTast 3 og tryk ENTER hvis der ikke skal redigeres");
             int memberCompetitorOrNot = readInt();
             if (memberCompetitorOrNot == 1) {
-                editMember.setisStudying(true);
+                editMember.setActivity(true);
             } else if (memberCompetitorOrNot == 2) {
-                editMember.setisStudying(false);
+                editMember.setActivity(false);
             } else if (memberCompetitorOrNot == 3) {
                 System.out.println("Ingen videre ændring");
             } else {
@@ -329,7 +342,20 @@ public class UserInterface {
             if (!memberNewMembership.trim().isEmpty())
                 editMember.setMembership(memberNewMembership);
 
-
+            System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");
+            System.out.println("Du er igang med at redigere: " + editMember.getBirthday());
+            String newbDay = sc.nextLine();
+            if(!newbDay.isEmpty()) {
+                LocalDate newDateOfBirth;
+                try {
+                    int newMemberAge = Period.between(LocalDate.parse(newbDay, formatter), LocalDate.now()).getYears();
+                    newDateOfBirth = LocalDate.parse(newbDay, formatter);
+                    editMember.setBirthday(newDateOfBirth);
+                    editMember.setMemberAge(newMemberAge);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Du skal sørge for at indtaste i det rigtige format, dd-MM-yyyy");
+                }
+            }
 
             //Ændring om medlemmet studerer eller ej
             System.out.println("Indtast den ønskede data, og tryk Enter. Hvis du ikke ønsker at redigere tast 0");

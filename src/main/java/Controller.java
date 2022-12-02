@@ -58,12 +58,12 @@ public class Controller {
         return svømmeklub.checkAndUpdateAge();
     }
 
-    public void createJuniorTeam(Coach coach) {
-        svømmeklub.createJuniorTeam(coach);
+    public void createJuniorTeam() {
+        svømmeklub.createJuniorTeam();
     }
 
-    public void createSeniorTeam(Coach coach) {
-        svømmeklub.createSeniorTeam(coach);
+    public void createSeniorTeam() {
+        svømmeklub.createSeniorTeam();
     }
 
     public void addTeamJunior() {

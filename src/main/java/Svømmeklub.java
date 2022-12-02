@@ -15,15 +15,33 @@ public class Svømmeklub {
     public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
         member = new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
         memberList.add(member);
-        addTeamJunior();
+        //addTeamJunior();
     }
 
-    public void createJuniorTeam(Coach coach) {
+    public Svømmeklub() {
+        juniorTeam = new JuniorTeam();
+        seniorTeam = new SeniorTeam();
+        //createJuniorTeam();
+    }
+
+    /*public void createJuniorTeam(Coach coach) {
         juniorTeam = new JuniorTeam(coach);
+    }*/
+
+    public void createJuniorTeam() {
+        for (Member m: memberList) {
+            if(m.getActivity() == true && m.getMemberAge() < 18) {
+                juniorTeam.add(m);
+            }
+        }
     }
 
-    public void createSeniorTeam(Coach coach) {
-        seniorTeam = new SeniorTeam(coach);
+    public void createSeniorTeam() {
+        for (Member m: memberList) {
+            if(m.getActivity() == true && m.getMemberAge() > 18) {
+                seniorTeam.add(m);
+            }
+        }
     }
 
     public void addTeamJunior() {
@@ -39,7 +57,6 @@ public class Svømmeklub {
                 }
             }
         } catch (NullPointerException npe) {
-
         }
 
         /*try {
