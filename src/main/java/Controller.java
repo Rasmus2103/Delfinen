@@ -6,8 +6,8 @@ public class Controller {
     Svømmeklub svømmeklub = new Svømmeklub();
     FileHandler fileHandler = new FileHandler();
 
-    public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        svømmeklub.addMember(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+        svømmeklub.addMember(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
     }
 
     public ArrayList<Member> showSwimList() {
@@ -74,11 +74,35 @@ public class Controller {
         svømmeklub.addTeamSenior();
     }*/
 
+
+
     public ArrayList<Member> getJuniorList() {
         return svømmeklub.getJuniorList();
     }
 
     public ArrayList<Member> getSeniorList() {
         return svømmeklub.getSeniorList();
+    }
+    public boolean addSwimDiscipline(ArrayList<String> swimDiscipline, String discipline){
+        return svømmeklub.addSwimDiscipline(swimDiscipline, discipline);
+    }
+
+    public void addTræningsResultatJunior(TræningsResultat resultat){
+        svømmeklub.addTræningsResultatJunior(resultat);
+    }
+    public void addTræningsResultatSenior(TræningsResultat resultat){
+        svømmeklub.addTræningsResultatSenior(resultat);
+    }
+
+    public void addStævneResultatJunior(StævneResultat resultat){
+        svømmeklub.addStævneResultatJunior(resultat);
+    }
+    public void addStævneResultatSenior(StævneResultat resultat){
+        svømmeklub.addStævneResultatSenior(resultat);
+    }
+
+    public boolean verifySwimDiscipline (String discipline) {
+        return svømmeklub.verifySwimDiscipline(discipline);
+
     }
 }

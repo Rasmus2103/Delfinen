@@ -12,8 +12,8 @@ public class Svømmeklub {
     Member member;
 
 
-    public void addMember(String memberName, boolean activities, String memberShip, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        member = new Member(memberName, activities, memberShip, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
+        member = new Member(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
         memberList.add(member);
         //addTeamJunior();
     }
@@ -45,8 +45,6 @@ public class Svømmeklub {
     }
 
     public void addTeamJunior() {
-        System.out.println("addTeamJunior");
-        System.out.println(member);
 
         try {
             for (Member m: memberList) {
@@ -216,6 +214,46 @@ public class Svømmeklub {
 
     public ArrayList<Member> getSeniorList() {
         return seniorTeam.getSeniorMembers();
+    }
+
+    public boolean addSwimDiscipline(ArrayList<String> swimDiscipline, String discipline){
+        String disciplineUpperCase = discipline.toUpperCase();
+        boolean swimDisciplineAdded = false;
+        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()){
+            if (enumDiscipline.toString().equals(disciplineUpperCase)){
+               if (!swimDiscipline.contains(disciplineUpperCase)){
+                   swimDiscipline.add(disciplineUpperCase);
+                   swimDisciplineAdded = true;
+               }
+            }
+        }
+        return swimDisciplineAdded;
+    }
+
+    public boolean verifySwimDiscipline(String discipline){
+        String disciplineUpperCase = discipline.toUpperCase();
+        boolean swimDisciplineAdded = false;
+        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()){
+            if (enumDiscipline.toString().equals(disciplineUpperCase)) {
+                swimDisciplineAdded = true;
+            }
+        }
+        return swimDisciplineAdded;
+    }
+
+    public void addTræningsResultatJunior(TræningsResultat resultat) {
+        juniorTeam.addTræningsResultat(resultat);
+    }
+    public void addTræningsResultatSenior(TræningsResultat resultat) {
+        seniorTeam.addTræningsResultat(resultat);
+    }
+
+
+    public void addStævneResultatJunior(StævneResultat resultat) {
+        juniorTeam.addStævneResultat(resultat);
+    }
+    public void addStævneResultatSenior(StævneResultat resultat) {
+        seniorTeam.addStævneResultat(resultat);
     }
 
 }

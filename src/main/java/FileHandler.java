@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -36,12 +37,13 @@ public class FileHandler {
                 Member m = new Member(
                         Strings[0],
                         Boolean.parseBoolean(Strings[1]),
-                        Strings[3],
-                        Integer.parseInt(Strings[2]),
-                        Boolean.parseBoolean(Strings[4]),
-                        Integer.parseInt(Strings[5]),
-                        Strings[6],
-                        LocalDate.parse(Strings[7])
+                        Strings[2],
+                        loadSwimDisciplines(Strings),
+                        Integer.parseInt(Strings[4]),
+                        Boolean.parseBoolean(Strings[5]),
+                        Integer.parseInt(Strings[6]),
+                        Strings[7],
+                        LocalDate.parse(Strings[8])
                         /*Integer.parseInt(Strings[7])*/
                 );
                 listOfMembers.add(m);
@@ -56,6 +58,16 @@ public class FileHandler {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public ArrayList<String> loadSwimDisciplines(String[] strings){
+        ArrayList<String> swimDisciplines = new ArrayList<>();
+        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()) {
+            if(strings[3].contains(enumDiscipline.toString())) {
+                swimDisciplines.add(enumDiscipline.toString());
+            }
+        }
+       return swimDisciplines;
     }
 
 }

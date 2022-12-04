@@ -100,8 +100,10 @@ public class UserInterface {
                     seeMembersJunior();
                     break;
                 case 2:
+                    addTræningsResultatJunior();
                     break;
                 case 3:
+                    addStævneresultatJunior();
                     break;
                 case 9:
                     coach();
@@ -119,6 +121,120 @@ public class UserInterface {
         for(int i = 0; i < controller.getJuniorList().size(); i++) {
             System.out.println(controller.getJuniorList().get(i));
         }
+    }
+
+    public void addTræningsResultatJunior(){
+
+        try {
+            TræningsResultat træningsResultat = getTræningsResultat();
+
+            controller.addTræningsResultatJunior(træningsResultat);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+    public void addTræningsResultatSenior(){
+
+        try {
+            TræningsResultat træningsResultat = getTræningsResultat();
+
+            controller.addTræningsResultatSenior(træningsResultat);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+
+    public void addStævneresultatJunior(){
+
+        try {
+            StævneResultat stævneResultat = getStævneResultat();
+
+            controller.addStævneResultatJunior(stævneResultat);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+    public void addStævneResultatSenior(){
+
+        try {
+            StævneResultat stævneResultat = getStævneResultat();
+
+            controller.addStævneResultatSenior(stævneResultat);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+
+    private TræningsResultat getTræningsResultat() {
+        System.out.println(" ");
+        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet");
+        String resultat = sc.nextLine();
+        System.out.println("Du har registreret følgende resultat: " + resultat);
+        System.out.println(" ");
+
+        System.out.println("Vælg hvilken svømme disciplin du ønsker");
+        String chosenDiscipline = sc.nextLine();
+        while (!controller.verifySwimDiscipline(chosenDiscipline)) {
+            System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
+            chosenDiscipline = sc.nextLine();
+        }
+
+        System.out.println("Indtast resultat dato");
+        String dateString = sc.nextLine();
+        LocalDate dateOfResult;
+        try {
+            dateOfResult = LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Du skal sørge for at indtaste i det rigtige format, dd-MM-yyyy");
+            dateString = sc.nextLine();
+            dateOfResult = LocalDate.parse(dateString, formatter);
+        }
+        System.out.println("Indtast et medlems navn");
+        String memberName = sc.nextLine();
+        TræningsResultat træningsResultat = new TræningsResultat(resultat, chosenDiscipline, dateOfResult, memberName);
+        return træningsResultat;
+    }
+
+    private StævneResultat getStævneResultat() {
+        System.out.println(" ");
+        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet");
+        String resultat = sc.nextLine();
+        System.out.println("Du har registreret følgende resultat: " + resultat);
+        System.out.println(" ");
+
+        System.out.println("Vælg hvilken svømme disciplin du ønsker");
+        String chosenDiscipline = sc.nextLine();
+        while (!controller.verifySwimDiscipline(chosenDiscipline)) {
+            System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
+            chosenDiscipline = sc.nextLine();
+        }
+
+        System.out.println("Indtast resultat dato");
+        String dateString = sc.nextLine();
+        LocalDate dateOfResult;
+        try {
+            dateOfResult = LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Du skal sørge for at indtaste i det rigtige format, dd-MM-yyyy");
+            dateString = sc.nextLine();
+            dateOfResult = LocalDate.parse(dateString, formatter);
+        }
+        System.out.println("Indtast et medlems navn");
+        String memberName = sc.nextLine();
+        StævneResultat stævneResultat = new StævneResultat(resultat, chosenDiscipline, dateOfResult, memberName);
+        return stævneResultat;
     }
 
     private void coachSenior() {
@@ -141,8 +257,10 @@ public class UserInterface {
                     seeMembersSenior();
                     break;
                 case 2:
+                    addTræningsResultatSenior();
                     break;
                 case 3:
+                    addStævneResultatSenior();
                     break;
                 case 9:
                     coach();
@@ -249,6 +367,31 @@ public class UserInterface {
             System.out.println("Du registreret at medlemmet har et: " + membership + " medlemsskab");
             System.out.println(" ");
 
+            System.out.println("Vælg hvilken svømme disciplin du ønsker");
+            ArrayList<String> swimDiscipline = new ArrayList<>();
+            String chosenDiscipline = sc.nextLine();
+            while (!controller.addSwimDiscipline(swimDiscipline,chosenDiscipline)) {
+                System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
+                chosenDiscipline = sc.nextLine();
+            }
+
+            System.out.println("Du har tilføjet " + chosenDiscipline);
+
+            int stillAddingDisciplines = 1;
+            while (stillAddingDisciplines == 1) {
+                System.out.println("Ønsker du at indtaste flere discipliner? ");
+                System.out.println("Indtast disciplin eller indtast 0 for at gå videre");
+                String disciplineToAdd = sc.nextLine();
+
+                if (disciplineToAdd.equals("0")) {
+                    stillAddingDisciplines = 0;
+                }else if (controller.addSwimDiscipline(swimDiscipline, disciplineToAdd)){
+                    System.out.println("Du har tilføjet " + disciplineToAdd);
+                }
+                else {
+                    System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
+                }
+            }
             System.out.println("Indtast medlemmets fødselsdags dato");
             String bDay = sc.nextLine();
             LocalDate dateOfBirth;
@@ -291,7 +434,7 @@ public class UserInterface {
             System.out.println(" ");
             System.out.println("addMember");
 
-            controller.addMember(memberName, activity, membership, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+            controller.addMember(memberName, activity, membership,swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
         } catch (Exception ignored) {
             ignored.printStackTrace();

@@ -1,8 +1,12 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SeniorTeam {
     private Coach coach;
     private ArrayList<Member> seniorMembers;
+
+    private ArrayList<TræningsResultat> træningsResultater = new ArrayList<>();
+    private ArrayList<StævneResultat> stævneResultat = new ArrayList<>();
 
     /*public SeniorTeam(Coach coach) {
         this.coach = coach;
@@ -12,6 +16,18 @@ public class SeniorTeam {
     public SeniorTeam() {
         coach = new Coach("Andreas");
         seniorMembers = new ArrayList<>();
+    }
+
+    public void addTræningsResultat(String resultat, String disciplin, LocalDate dato, String name) {
+        træningsResultater.add(new TræningsResultat(resultat, disciplin, dato, name));
+    }
+
+    public void addTræningsResultat(TræningsResultat resultat) {
+        træningsResultater.add(resultat);
+    }
+
+    public void addStævneResultat(StævneResultat resultat) {
+        stævneResultat.add(resultat);
     }
 
     public Coach getCoach() {
