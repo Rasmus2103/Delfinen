@@ -218,4 +218,13 @@ public class Svømmeklub {
         return seniorTeam.getSeniorMembers();
     }
 
+    //Beregn kontingenten
+    public int calculateRate() {
+        int Income = 0;
+
+    for (Member member : memberList) {
+          Income += member.getMemberRate();
+}
+    return Income;
+}
 }

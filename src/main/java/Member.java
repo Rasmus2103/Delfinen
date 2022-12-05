@@ -10,6 +10,7 @@ public class Member {
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
+    private String memberAgeType;
     //private int subsription;
 
 
@@ -22,7 +23,15 @@ public class Member {
         this.isStudying = isStudying;
         this.memberNumber = memberNumber;
         this.eMail = eMail;
+        this.memberAgeType = memberAgeType;
         //this.subsription = subsription;
+    }
+
+    //Kontingent
+    private int memberRate;
+
+    public int getMemberRate() {
+        return memberRate;
     }
 
     public Member(String memberName, boolean activity, String membership, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
@@ -65,15 +74,17 @@ public class Member {
         return isStudying;
     }
 
-    public int getMemberNumber(){
+    public int getMemberNumber() {
         return memberNumber;
     }
 
-    public String geteMail(){
+    public String geteMail() {
         return eMail;
     }
 
-    public LocalDate getBirthday(){return birthday;}
+    public LocalDate getBirthday() {
+        return birthday;
+    }
 
     /*public int getSubsription() {
         return subsription;
@@ -93,7 +104,7 @@ public class Member {
         this.membership = membership;
     }
 
-    public void setMemberAge(int memberAge){
+    public void setMemberAge(int memberAge) {
         this.memberAge = memberAge;
     }
 
@@ -101,11 +112,11 @@ public class Member {
         this.isStudying = isStudying;
     }
 
-    public void setMemberNumber(int memberNumber){
+    public void setMemberNumber(int memberNumber) {
         this.memberNumber = memberNumber;
     }
 
-    public void seteMail(String eMail){
+    public void seteMail(String eMail) {
         this.eMail = eMail;
     }
 
@@ -120,12 +131,12 @@ public class Member {
     @Override
     public String toString() {
         String text;
-        if(isStudying)
+        if (isStudying)
             text = "Studerende";
         else
             text = "Ikke studerende";
         String text2;
-        if(activity)
+        if (activity)
             text2 = "Konkurrencesvømmer";
         else
             text2 = "Motionistsvømmer";
@@ -141,6 +152,34 @@ public class Member {
                 '}';
     }
 
+    //  kontingentsats
+
+    public void memberAgeType() {
+
+        if (memberAge < 18) {
+            this.memberAgeType = "Junior";
+        } else if (memberAge > 60) {
+            this.memberAgeType = "Senior";
+        } else {
+            this.memberAgeType = "Voksen";
+        }
+    }
+
+    // beregn memberRate
+    public void Findrate() {
+        int kontingent = 0;
+        if (membership.contains("aktivt")) {
+            if (memberAgeType.equals("juniorsvømmer")) {
+                kontingent = 1000;
+            } else if (memberAgeType.equals("seniorsvømmer")) {
+                kontingent = 1600;
+
+            } else {
+                kontingent = 500;
+            }
+            memberRate = kontingent;
+        }
+
    /* public String csvToString() {
         String text;
         if(isStudying)
@@ -155,7 +194,8 @@ public class Member {
         return memberName + ";" + text2 + ";" + membership + ";" + memberAge + ";" + text + ";" + memberNumber + ";" + eMail + ";" + birthday;
     }*/
 
-    public String csvToString() {
-        return memberName + ";" + activity + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
+        public String csvToString () {
+            return memberName + ";" + activity + ";" + membership + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
+        }
     }
 }
