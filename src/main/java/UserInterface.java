@@ -41,6 +41,8 @@ public class UserInterface {
                 case 2:
                     coach();
                     break;
+                case 3:
+                    break;
                 case 9:
                     System.out.println("Lukker for systemet");
                     System.exit(0);
@@ -83,7 +85,7 @@ public class UserInterface {
     public void coachJunior() {
         System.out.println("Velkommen " + coachJunior.getName() + " til Juniorholdet \nVælg en af følgende valgmuligheder");
         //controller.createJuniorTeam(coachJunior);
-        controller.addTeamJunior();
+        //controller.addTeamJunior();
         int userChoice = 0;
 
         while(userChoice != 9) {
@@ -91,7 +93,9 @@ public class UserInterface {
                     1. Se alle holdmedlemmer
                     2. Registering af træningsresultat
                     3. Registering af stævneresultat
-                    4. Se top 5 fra hver disciplin
+                    4. Se alle træningstider
+                    5. Se alle stævneresultater
+                    6. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
             userChoice = readInt();
@@ -100,10 +104,18 @@ public class UserInterface {
                     seeMembersJunior();
                     break;
                 case 2:
-                    addTræningsResultatJunior();
+                    addTrainingResultJunior();
                     break;
                 case 3:
-                    addStævneresultatJunior();
+                    addCompetitorResultJunior();
+                    break;
+                case 4:
+                    seeTrainingJunior();
+                    break;
+                case 5:
+                    seeCompetitorJunior();
+                    break;
+                case 6:
                     break;
                 case 9:
                     coach();
@@ -123,12 +135,24 @@ public class UserInterface {
         }
     }
 
-    public void addTræningsResultatJunior(){
+    public void seeTrainingJunior() {
+        for (int i = 0; i < controller.trainingListJunior().size(); i++) {
+            System.out.println(controller.trainingListJunior().get(i));
+        }
+    }
+
+    public void seeCompetitorJunior() {
+        for (int i = 0; i < controller.competitorListJunior().size(); i++) {
+            System.out.println(controller.trainingListJunior().get(i));
+        }
+    }
+
+    public void addTrainingResultJunior(){
 
         try {
-            TræningsResultat træningsResultat = getTræningsResultat();
+            TrainingResults trainingResults = getTrainingResults();
 
-            controller.addTræningsResultatJunior(træningsResultat);
+            controller.addTrainingResultsJunior(trainingResults);
 
         } catch (Exception ignored) {
             ignored.printStackTrace();
@@ -136,39 +160,12 @@ public class UserInterface {
 
     }
 
-    public void addTræningsResultatSenior(){
+    public void addTrainingResultSenior(){
 
         try {
-            TræningsResultat træningsResultat = getTræningsResultat();
+            TrainingResults trainingResults = getTrainingResults();
 
-            controller.addTræningsResultatSenior(træningsResultat);
-
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
-
-    }
-
-
-    public void addStævneresultatJunior(){
-
-        try {
-            StævneResultat stævneResultat = getStævneResultat();
-
-            controller.addStævneResultatJunior(stævneResultat);
-
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
-
-    }
-
-    public void addStævneResultatSenior(){
-
-        try {
-            StævneResultat stævneResultat = getStævneResultat();
-
-            controller.addStævneResultatSenior(stævneResultat);
+            controller.addTrainingResultsSenior(trainingResults);
 
         } catch (Exception ignored) {
             ignored.printStackTrace();
@@ -177,21 +174,48 @@ public class UserInterface {
     }
 
 
-    private TræningsResultat getTræningsResultat() {
+    public void addCompetitorResultJunior(){
+
+        try {
+            CompetitorResults competitorResults = getCompetitorResults();
+
+            controller.addCompetitorResultsJunior(competitorResults);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+    public void addCompetitorResultSenior(){
+
+        try {
+            CompetitorResults competitorResults = getCompetitorResults();
+
+            controller.addCompetitorResultsSenior(competitorResults);
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+
+    }
+
+
+    private TrainingResults getTrainingResults() {
         System.out.println(" ");
-        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet");
+        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet (tt:mm:ss)");
         String resultat = sc.nextLine();
         System.out.println("Du har registreret følgende resultat: " + resultat);
         System.out.println(" ");
 
-        System.out.println("Vælg hvilken svømme disciplin du ønsker");
+        System.out.println("Vælg hvilken svømme disciplin du ønsker (Crawl, Rygcrawl, Butterfly, Brystsvømning)");
         String chosenDiscipline = sc.nextLine();
         while (!controller.verifySwimDiscipline(chosenDiscipline)) {
             System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
             chosenDiscipline = sc.nextLine();
         }
 
-        System.out.println("Indtast resultat dato");
+        System.out.println("Indtast resultat (dd-MM-yyyy)");
         String dateString = sc.nextLine();
         LocalDate dateOfResult;
         try {
@@ -203,15 +227,15 @@ public class UserInterface {
         }
         System.out.println("Indtast et medlems navn");
         String memberName = sc.nextLine();
-        TræningsResultat træningsResultat = new TræningsResultat(resultat, chosenDiscipline, dateOfResult, memberName);
+        TrainingResults træningsResultat = new TrainingResults(resultat, chosenDiscipline, dateOfResult, memberName);
         return træningsResultat;
     }
 
-    private StævneResultat getStævneResultat() {
+    private CompetitorResults getCompetitorResults() {
         System.out.println(" ");
         System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet");
-        String resultat = sc.nextLine();
-        System.out.println("Du har registreret følgende resultat: " + resultat);
+        String result = sc.nextLine();
+        System.out.println("Du har registreret følgende resultat: " + result);
         System.out.println(" ");
 
         System.out.println("Vælg hvilken svømme disciplin du ønsker");
@@ -233,8 +257,8 @@ public class UserInterface {
         }
         System.out.println("Indtast et medlems navn");
         String memberName = sc.nextLine();
-        StævneResultat stævneResultat = new StævneResultat(resultat, chosenDiscipline, dateOfResult, memberName);
-        return stævneResultat;
+        CompetitorResults competitorResults = new CompetitorResults(result, chosenDiscipline, dateOfResult, memberName);
+        return competitorResults;
     }
 
     private void coachSenior() {
@@ -248,7 +272,9 @@ public class UserInterface {
                     1. Se alle holdmedlemmer
                     2. Registering af træningsresultat
                     3. Registering af stævneresultat
-                    4. Se top 5 fra hver disciplin
+                    4. Se alle træningstider
+                    5. Se alle stævneresultater
+                    6. Se top 5 fra hver disciplin
                     9. Tilbage til menuen
                     """);
             userChoice = readInt();
@@ -257,10 +283,18 @@ public class UserInterface {
                     seeMembersSenior();
                     break;
                 case 2:
-                    addTræningsResultatSenior();
+                    addTrainingResultSenior();
                     break;
                 case 3:
-                    addStævneResultatSenior();
+                    addCompetitorResultSenior();
+                    break;
+                case 4:
+                    seeTrainingSenior();
+                    break;
+                case 5:
+                    seeCompetitorSenior();
+                    break;
+                case 6:
                     break;
                 case 9:
                     coach();
@@ -277,6 +311,18 @@ public class UserInterface {
         System.out.println(controller.getSeniorList().size());
         for(int i = 0; i < controller.getSeniorList().size(); i++) {
             System.out.println(controller.getSeniorList().get(i));
+        }
+    }
+
+    public void seeTrainingSenior() {
+        for (int i = 0; i < controller.trainingsListSenior().size(); i++) {
+            System.out.println(controller.trainingsListSenior().get(i));
+        }
+    }
+
+    public void seeCompetitorSenior() {
+        for (int i = 0; i < controller.competitorListSenior().size(); i++) {
+            System.out.println(controller.competitorListSenior().get(i));
         }
     }
 
@@ -444,14 +490,14 @@ public class UserInterface {
     public void editMember() {
         try {
             System.out.println("Vælg et medlem du ønsker at redigere i (Vælg ved at indtaste position på listen): ");
-            for (int i = 0; i < controller.getSwimList().size(); i++) {
-                System.out.println(i + 1 + ":" + controller.getSwimList().get(i));
+            for (int i = 0; i < controller.getMemberList().size(); i++) {
+                System.out.println(i + 1 + ":" + controller.getMemberList().get(i));
             }
             Scanner sc = new Scanner(System.in);
             int number = sc.nextInt();
             sc.nextLine();
 
-            Member editMember = controller.getSwimList().get(number - 1);
+            Member editMember = controller.getMemberList().get(number - 1);
             System.out.println("Du er igang med at redigere i " + editMember);
 
             //Ændring af medlemmets navn
@@ -532,8 +578,8 @@ public class UserInterface {
 
     public void removeMember() {
         try {
-            for (int i = 0; i < controller.getSwimList().size(); i++) {
-                System.out.println(i + ":" + controller.showSwimList().get(i));
+            for (int i = 0; i < controller.getMemberList().size(); i++) {
+                System.out.println(i + ":" + controller.showMemberList().get(i));
             }
             System.out.println("Vælg det medlem du ønsker at slette ud fra deres medlemsnummer");
             int number = readInt();

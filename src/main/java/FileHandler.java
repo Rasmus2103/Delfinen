@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -62,12 +61,12 @@ public class FileHandler {
 
     public ArrayList<String> loadSwimDisciplines(String[] strings){
         ArrayList<String> swimDisciplines = new ArrayList<>();
-        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()) {
+        for (SwimDisciplines enumDiscipline: SwimDisciplines.values()) {
             if(strings[3].contains(enumDiscipline.toString())) {
                 swimDisciplines.add(enumDiscipline.toString());
             }
         }
-       return swimDisciplines;
+        return swimDisciplines;
     }
 
 }

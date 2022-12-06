@@ -81,7 +81,9 @@ public class Member {
         return eMail;
     }
 
-    public LocalDate getBirthday(){return birthday;}
+    public LocalDate getBirthday(){
+        return birthday;
+    }
 
     /*public int getSubsription() {
         return subsription;

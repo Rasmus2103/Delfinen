@@ -5,8 +5,8 @@ public class JuniorTeam {
     private Coach coach;
     private ArrayList<Member> juniorMembers;
 
-    private ArrayList<TræningsResultat> træningsResultater = new ArrayList<>();
-    private ArrayList<StævneResultat> stævneResultat = new ArrayList<>();
+    private ArrayList<TrainingResults> trainingResults = new ArrayList<>();
+    private ArrayList<CompetitorResults> competitorResults = new ArrayList<>();
 
     /*public JuniorTeam(Coach coach) {
         this.coach = coach;
@@ -19,15 +19,15 @@ public class JuniorTeam {
     }
 
     public void addTræningsResultat(String resultat, String disciplin, LocalDate dato, String name) {
-        træningsResultater.add(new TræningsResultat(resultat, disciplin, dato, name));
+        trainingResults.add(new TrainingResults(resultat, disciplin, dato, name));
     }
 
-    public void addTræningsResultat(TræningsResultat resultat) {
-        træningsResultater.add(resultat);
+    public void addTræningsResultat(TrainingResults resultat) {
+        trainingResults.add(resultat);
     }
 
-    public void addStævneResultat(StævneResultat resultat) {
-        stævneResultat.add(resultat);
+    public void addStævneResultat(CompetitorResults resultat) {
+        competitorResults.add(resultat);
     }
 
     public Coach getCoach() {
@@ -40,6 +40,14 @@ public class JuniorTeam {
 
     public ArrayList<Member> getJuniorMembers() {
         return juniorMembers;
+    }
+
+    public ArrayList<TrainingResults> getTrainingResults() {
+        return trainingResults;
+    }
+
+    public ArrayList<CompetitorResults> getCompetitorResults() {
+        return competitorResults;
     }
 
     @Override

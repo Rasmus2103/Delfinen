@@ -1,4 +1,4 @@
-public enum Svømmediscipliner {
+public enum SwimDisciplines {
     CRAWL,
     BRYSTSVØMNING,
     BUTTERFLY,

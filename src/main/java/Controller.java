@@ -3,35 +3,35 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    Svømmeklub svømmeklub = new Svømmeklub();
+    SwimClub swimClub = new SwimClub();
     FileHandler fileHandler = new FileHandler();
 
     public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        svømmeklub.addMember(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+        swimClub.addMember(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
     }
 
-    public ArrayList<Member> showSwimList() {
-        return svømmeklub.getSwimList();
+    public ArrayList<Member> showMemberList() {
+        return swimClub.getSwimList();
     }
 
-    public ArrayList<Member> getSwimList() {
-        return svømmeklub.getSwimList();
+    public ArrayList<Member> getMemberList() {
+        return swimClub.getSwimList();
     }
 
     public void removeMember(int number) {
-        svømmeklub.memberList.remove(number);
+        swimClub.memberList.remove(number);
     }
 
     public ArrayList<Member> searchByMemberName(String searchMemberName) {
-        return svømmeklub.searchByMemberName(searchMemberName);
+        return swimClub.searchByMemberName(searchMemberName);
     }
 
     public ArrayList<Member> searchByActivities(boolean searchActivity) {
-        return svømmeklub.searchByActivities(searchActivity);
+        return swimClub.searchByActivities(searchActivity);
     }
 
     public ArrayList<Member> searchByMembership(String searchMembership) {
-        return svømmeklub.searchByMembership(searchMembership);
+        return swimClub.searchByMembership(searchMembership);
     }
 
     public void loadDB() {
@@ -39,36 +39,36 @@ public class Controller {
     }
 
     public void printDB() {
-        svømmeklub.printDB();
+        swimClub.printDB();
     }
 
     public void saveToDB() {
-        fileHandler.saveToDB(svømmeklub.getSwimList());
+        fileHandler.saveToDB(swimClub.getSwimList());
     }
 
     public boolean isMemberNumberTaken(int newMemberNumber) {
-        return svømmeklub.isMemberNumberTaken(newMemberNumber);
+        return swimClub.isMemberNumberTaken(newMemberNumber);
     }
 
     public void setSwimList(ArrayList<Member> memberList) {
-        this.svømmeklub.memberList = memberList;
+        this.swimClub.memberList = memberList;
     }
 
     public boolean checkAndUpdateAge () {
-        return svømmeklub.checkAndUpdateAge();
+        return swimClub.checkAndUpdateAge();
     }
 
     public void createJuniorTeam() {
-        svømmeklub.createJuniorTeam();
+        swimClub.createJuniorTeam();
     }
 
     public void createSeniorTeam() {
-        svømmeklub.createSeniorTeam();
+        swimClub.createSeniorTeam();
     }
 
-    public void addTeamJunior() {
+    /*public void addTeamJunior() {
         svømmeklub.addTeamJunior();
-    }
+    }*/
 
     /*public void addTeamSenior() {
         svømmeklub.addTeamSenior();
@@ -77,32 +77,48 @@ public class Controller {
 
 
     public ArrayList<Member> getJuniorList() {
-        return svømmeklub.getJuniorList();
+        return swimClub.getJuniorList();
     }
 
     public ArrayList<Member> getSeniorList() {
-        return svømmeklub.getSeniorList();
+        return swimClub.getSeniorList();
     }
     public boolean addSwimDiscipline(ArrayList<String> swimDiscipline, String discipline){
-        return svømmeklub.addSwimDiscipline(swimDiscipline, discipline);
+        return swimClub.addSwimDiscipline(swimDiscipline, discipline);
     }
 
-    public void addTræningsResultatJunior(TræningsResultat resultat){
-        svømmeklub.addTræningsResultatJunior(resultat);
+    public void addTrainingResultsJunior(TrainingResults resultat){
+        swimClub.addTrainingResultsJunior(resultat);
     }
-    public void addTræningsResultatSenior(TræningsResultat resultat){
-        svømmeklub.addTræningsResultatSenior(resultat);
+    public void addTrainingResultsSenior(TrainingResults resultat){
+        swimClub.addTrainingResultsSenior(resultat);
     }
 
-    public void addStævneResultatJunior(StævneResultat resultat){
-        svømmeklub.addStævneResultatJunior(resultat);
+    public void addCompetitorResultsJunior(CompetitorResults resultat){
+        swimClub.addCompetitorResultsJunior(resultat);
     }
-    public void addStævneResultatSenior(StævneResultat resultat){
-        svømmeklub.addStævneResultatSenior(resultat);
+    public void addCompetitorResultsSenior(CompetitorResults resultat){
+        swimClub.addCompetitorResultsSenior(resultat);
+    }
+
+    public ArrayList<TrainingResults> trainingListJunior() {
+        return swimClub.trainingListJunior();
+    }
+
+    public ArrayList<CompetitorResults> competitorListJunior() {
+        return swimClub.competitorListJunior();
+    }
+
+    public ArrayList<TrainingResults> trainingsListSenior() {
+        return swimClub.trainingListSenior();
+    }
+
+    public ArrayList<CompetitorResults> competitorListSenior() {
+        return swimClub.competitorListSenior();
     }
 
     public boolean verifySwimDiscipline (String discipline) {
-        return svømmeklub.verifySwimDiscipline(discipline);
+        return swimClub.verifySwimDiscipline(discipline);
 
     }
 }

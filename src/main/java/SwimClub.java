@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-public class Svømmeklub {
+public class SwimClub {
 
     //TODO lav memberlist private
     ArrayList<Member> memberList = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Svømmeklub {
         //addTeamJunior();
     }
 
-    public Svømmeklub() {
+    public SwimClub() {
         juniorTeam = new JuniorTeam();
         seniorTeam = new SeniorTeam();
         //createJuniorTeam();
@@ -44,7 +44,7 @@ public class Svømmeklub {
         }
     }
 
-    public void addTeamJunior() {
+    /*public void addTeamJunior() {
 
         try {
             for (Member m: memberList) {
@@ -55,7 +55,7 @@ public class Svømmeklub {
                 }
             }
         } catch (NullPointerException npe) {
-        }
+        }*/
 
         /*try {
             if (member.getMemberAge() < 18) {
@@ -66,7 +66,6 @@ public class Svømmeklub {
         } catch (NullPointerException npe) {
 
         }*/
-    }
 
     /*public void addTeamSenior() {
         seniorTeam.addTeammemberSenior(member);
@@ -219,7 +218,7 @@ public class Svømmeklub {
     public boolean addSwimDiscipline(ArrayList<String> swimDiscipline, String discipline){
         String disciplineUpperCase = discipline.toUpperCase();
         boolean swimDisciplineAdded = false;
-        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()){
+        for (SwimDisciplines enumDiscipline: SwimDisciplines.values()){
             if (enumDiscipline.toString().equals(disciplineUpperCase)){
                if (!swimDiscipline.contains(disciplineUpperCase)){
                    swimDiscipline.add(disciplineUpperCase);
@@ -233,7 +232,7 @@ public class Svømmeklub {
     public boolean verifySwimDiscipline(String discipline){
         String disciplineUpperCase = discipline.toUpperCase();
         boolean swimDisciplineAdded = false;
-        for (Svømmediscipliner enumDiscipline: Svømmediscipliner.values()){
+        for (SwimDisciplines enumDiscipline: SwimDisciplines.values()){
             if (enumDiscipline.toString().equals(disciplineUpperCase)) {
                 swimDisciplineAdded = true;
             }
@@ -241,19 +240,35 @@ public class Svømmeklub {
         return swimDisciplineAdded;
     }
 
-    public void addTræningsResultatJunior(TræningsResultat resultat) {
+    public void addTrainingResultsJunior(TrainingResults resultat) {
         juniorTeam.addTræningsResultat(resultat);
     }
-    public void addTræningsResultatSenior(TræningsResultat resultat) {
+    public void addTrainingResultsSenior(TrainingResults resultat) {
         seniorTeam.addTræningsResultat(resultat);
     }
 
 
-    public void addStævneResultatJunior(StævneResultat resultat) {
+    public void addCompetitorResultsJunior(CompetitorResults resultat) {
         juniorTeam.addStævneResultat(resultat);
     }
-    public void addStævneResultatSenior(StævneResultat resultat) {
+    public void addCompetitorResultsSenior(CompetitorResults resultat) {
         seniorTeam.addStævneResultat(resultat);
+    }
+
+    public ArrayList<TrainingResults> trainingListJunior() {
+        return juniorTeam.getTrainingResults();
+    }
+
+    public ArrayList<CompetitorResults> competitorListJunior() {
+        return juniorTeam.getCompetitorResults();
+    }
+
+    public ArrayList<TrainingResults> trainingListSenior() {
+        return seniorTeam.getTrainingResults();
+    }
+
+    public ArrayList<CompetitorResults> competitorListSenior() {
+        return seniorTeam.getCompetitorResults();
     }
 
 }
