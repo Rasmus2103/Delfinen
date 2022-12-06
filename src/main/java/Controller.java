@@ -6,8 +6,8 @@ public class Controller {
     SwimClub swimClub = new SwimClub();
     FileHandler fileHandler = new FileHandler();
 
-    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        swimClub.addMember(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth /*int subsription*/) {
+        swimClub.addMember(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth /*subsription*/);
     }
 
     public ArrayList<Member> showMemberList() {
@@ -119,6 +119,9 @@ public class Controller {
 
     public boolean verifySwimDiscipline (String discipline) {
         return swimClub.verifySwimDiscipline(discipline);
+    }
 
+    public int totalSubsription() {
+        return swimClub.totalSubsription();
     }
 }

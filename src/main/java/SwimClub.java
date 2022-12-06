@@ -12,8 +12,8 @@ public class SwimClub {
     Member member;
 
 
-    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth) {
-        member = new Member(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
+    public void addMember(String memberName, boolean activities, String memberShip, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail, LocalDate dateOfBirth /*int subsription*/) {
+        member = new Member(memberName, activities, memberShip, swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth /*subsription*/);
         memberList.add(member);
         //addTeamJunior();
     }
@@ -42,6 +42,14 @@ public class SwimClub {
                 seniorTeam.add(m);
             }
         }
+    }
+
+    public int totalSubsription() {
+        int total = 0;
+        for (Member m: memberList) {
+            total += m.calculateSubsription();
+        }
+        return total;
     }
 
     /*public void addTeamJunior() {
@@ -197,10 +205,6 @@ public class SwimClub {
             }
         }
         return ageUpdated;
-    }
-
-    public void initJuniorList() {
-
     }
 
     public ArrayList<Member> getSwimList() {

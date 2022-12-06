@@ -42,6 +42,7 @@ public class UserInterface {
                     coach();
                     break;
                 case 3:
+                    cashier();
                     break;
                 case 9:
                     System.out.println("Lukker for systemet");
@@ -53,6 +54,39 @@ public class UserInterface {
             }
         }
     }
+
+    public void cashier() {
+        System.out.println("Velkommen Kasser \nVælg en af følgende muligheder her");
+        int userChoice = 0;
+
+        while(userChoice != 9) {
+            System.out.println("""
+                    1. Registrer betaling
+                    2. Se samlet kontigentbetaling
+                    9. Tilbage til hovedmenuen
+                    """);
+            userChoice = readInt();
+            switch (userChoice) {
+                case 1:
+                    registerPayment();
+                    break;
+                case 2:
+                    totalSubspription();
+                    break;
+                case 9:
+                    //start();
+                    break;
+                default:
+                    System.out.println("Dit input er ikke gyldigt, indtast et af følgende tal");
+                    break;
+            }
+        }
+    }
+
+    private void totalSubspription() {
+        System.out.println(controller.totalSubsription() + " kr. ville den forventet betaling være");
+    }
+
 
     private void coach() {
         System.out.println("Velkommen Træner \nVælg en af følgende muligheder her");
@@ -431,7 +465,7 @@ public class UserInterface {
 
                 if (disciplineToAdd.equals("0")) {
                     stillAddingDisciplines = 0;
-                }else if (controller.addSwimDiscipline(swimDiscipline, disciplineToAdd)){
+                } else if (controller.addSwimDiscipline(swimDiscipline, disciplineToAdd)){
                     System.out.println("Du har tilføjet " + disciplineToAdd);
                 }
                 else {
@@ -478,7 +512,6 @@ public class UserInterface {
             String eMail = sc.nextLine();
             System.out.println("Du har registreret at medlemmets email adresse er: " + eMail);
             System.out.println(" ");
-            System.out.println("addMember");
 
             controller.addMember(memberName, activity, membership,swimDiscipline, memberAge, isStudying, memberNumber, eMail, dateOfBirth);
 
@@ -574,6 +607,21 @@ public class UserInterface {
             System.out.println("Der findes ikke et medlem med det nummer");
             editMember();
         }
+    }
+
+    public void registerPayment() {
+        System.out.println("Vælg et medlem du ønsker at fortage betaling for (Vælg ved at indtaste position på listen): ");
+        for (int i = 0; i < controller.getMemberList().size(); i++) {
+            System.out.println(i + 1 + ":" + controller.getMemberList().get(i));
+        }
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        sc.nextLine();
+
+        Member editMember = controller.getMemberList().get(number - 1);
+        System.out.println("Du er igang med at redigere i " + editMember);
+
+        editMember.setHasPaid();
     }
 
     public void removeMember() {

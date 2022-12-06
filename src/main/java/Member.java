@@ -12,7 +12,8 @@ public class Member {
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
-    //private int subsription;
+    private int subsription;
+    private boolean hasPaid;
 
 
     //Konstruktør
@@ -39,6 +40,8 @@ public class Member {
         this.eMail = eMail;
         //this.subsription = subsription;
         this.birthday = birthday;
+        this.hasPaid = false;
+        //this.subsription = subsription;
     }
 
     public Member() {
@@ -85,6 +88,10 @@ public class Member {
         return birthday;
     }
 
+    public int getSubsription() {
+        return subsription;
+    }
+
     /*public int getSubsription() {
         return subsription;
     }*/
@@ -127,9 +134,32 @@ public class Member {
         this.birthday = birthday;
     }
 
+    public void setHasPaid() {
+        this.hasPaid = true;
+    }
+
+    public void setSubsription() {
+        this.subsription = subsription;
+    }
+
     /*public void setSubsription(int subsription) {
         this.subsription = subsription;
     }*/
+
+
+    public int calculateSubsription() {
+        if(membership.equals("passivt")) {
+            return 500;
+        }
+        else if(memberAge < 18 && isStudying == true) {
+            return (int) (1000 * 0.85);
+        } else if(memberAge >= 18 && memberAge < 60 && isStudying == true) {
+            return (int) (1600 * 0.85);
+        } else if(memberAge >= 60) {
+            return (int) (1600 * 0.75);
+        }
+        return 0;
+    }
 
     @Override
     public String toString() {
@@ -138,6 +168,7 @@ public class Member {
             text = "Studerende";
         else
             text = "Ikke studerende";
+
         String text2;
         if(activity)
             text2 = "Konkurrencesvømmer";
@@ -153,6 +184,7 @@ public class Member {
                 ", memberNumber=" + memberNumber +
                 ", eMail='" + eMail + '\'' +
                 ", birthday='" + birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + '\'' +
+                ", har betalt= " + hasPaid +
                 '}';
     }
 
@@ -171,6 +203,6 @@ public class Member {
     }*/
 
     public String csvToString() {
-        return memberName + ";" + activity + ";" + membership + ";" + swimDiscipline + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
+        return memberName + ";" + activity + ";" + membership + ";" + swimDiscipline + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday + ";" + hasPaid;
     }
 }

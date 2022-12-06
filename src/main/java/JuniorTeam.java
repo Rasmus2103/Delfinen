@@ -18,9 +18,9 @@ public class JuniorTeam {
         juniorMembers = new ArrayList<>();
     }
 
-    public void addTræningsResultat(String resultat, String disciplin, LocalDate dato, String name) {
+    /*public void addTræningsResultat(String resultat, String disciplin, LocalDate dato, String name) {
         trainingResults.add(new TrainingResults(resultat, disciplin, dato, name));
-    }
+    }*/
 
     public void addTræningsResultat(TrainingResults resultat) {
         trainingResults.add(resultat);
