@@ -271,4 +271,15 @@ public class SwimClub {
         return seniorTeam.getCompetitorResults();
     }
 
+
+
+    //Beregn kontingenten
+    public int calculateRate() {
+        int Income = 0;
+
+        for (Member member : memberList) {
+            Income += member.getMemberRate();
+        }
+        return Income;
+    }
 }
