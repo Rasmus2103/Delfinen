@@ -84,8 +84,8 @@ public class UserInterface {
     }
 
     private void totalSubscription() {
-        System.out.println(controller.totalHasNotPaid() + " så mange penge mangler medlemmerne at betale");
-        System.out.println(controller.totalSubsription() + " kr. ville den forventet betaling være");
+        System.out.println(controller.totalHasNotPaid() + " så mange penge mangler medlemmerne at betale.");
+        System.out.println(controller.totalSubsription() + " kr. ville den forventet betaling være.");
     }
 
 
@@ -119,8 +119,6 @@ public class UserInterface {
 
     public void coachJunior() {
         System.out.println("Velkommen " + coachJunior.getName() + " til Juniorholdet \nVælg en af følgende valgmuligheder");
-        //controller.createJuniorTeam(coachJunior);
-        //controller.addTeamJunior();
         int userChoice = 0;
 
         while(userChoice != 9) {

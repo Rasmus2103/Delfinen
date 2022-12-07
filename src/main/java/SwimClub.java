@@ -64,39 +64,6 @@ public class SwimClub {
         return total;
     }
 
-    /*public void addTeamJunior() {
-
-        try {
-            for (Member m: memberList) {
-                if(member.getMemberAge() < 18) {
-                    juniorTeam.add(m);
-                } else {
-                    seniorTeam.add(m);
-                }
-            }
-        } catch (NullPointerException npe) {
-        }*/
-
-        /*try {
-            if (member.getMemberAge() < 18) {
-                System.out.println("Kom nu!");
-                juniorTeam.add(member);
-                System.out.println(juniorTeam.getJuniorMembers());
-            }
-        } catch (NullPointerException npe) {
-
-        }*/
-
-    /*public void addTeamSenior() {
-        seniorTeam.addTeammemberSenior(member);
-    }*/
-
-    /*public void addMemberToDatabase(Svømmeklub member) {
-        Database.add(member);
-    }*/
-
-    /*private static void add(Svømmeklub member) {
-    }*/
 
     public ArrayList<Member> searchByMemberName(String searchName) {
         ArrayList<Member> searchList = new ArrayList<>();

@@ -17,25 +17,6 @@ public class Member {
     //private int subsription;
     private boolean hasPaid;
 
-    //Kontingent
-    private int memberRate;
-
-    public int getMemberRate() {
-        return memberRate;
-    }
-
-    //Konstruktør
-    public Member(String memberName, boolean activity, String membership, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/) {
-        this.memberName = memberName;
-        this.activity = activity;
-        this.membership = membership;
-        this.swimDiscipline = swimDiscipline;
-        this.memberAge = memberAge;
-        this.isStudying = isStudying;
-        this.memberNumber = memberNumber;
-        this.eMail = eMail;
-        //this.subsription = subsription;
-    }
 
     public Member(String memberName, boolean activity, String membership, ArrayList<String> swimDiscipline, int memberAge, boolean isStudying, int memberNumber, String eMail /*int subsription*/, LocalDate birthday) {
         this.memberName = memberName;
@@ -53,9 +34,6 @@ public class Member {
 
     public Member() {
 
-    }
-
-    public static void sortByisStudying() {
     }
 
     //getter
@@ -99,11 +77,6 @@ public class Member {
         return hasPaid;
     }
 
-    /*public int getSubsription() {
-        return subsription;
-    }*/
-
-
     //setter
     public void setmemberName(String memberName) {
         this.memberName = memberName;
@@ -145,34 +118,45 @@ public class Member {
         this.hasPaid = true;
     }
 
+
     /*public void setSubsription(int subsription) {
         this.subsription = subsription;
     }*/
 
     public int calculateSubsription() {
+        int price = 0;
         if(membership.equals("passivt")) {
-            return 500;
-        } else if(memberAge < 18 && isStudying == true) {
-            return (int) (1000 * 0.85);
-        } else if(memberAge >= 18 && memberAge < 60 && isStudying == true) {
-            return (int) (1600 * 0.85);
+            price = 500;
+        } else if(memberAge < 18) {
+            price = 1000;
+        } else if(memberAge >= 18 && memberAge < 60) {
+            price = 1600;
         } else if(memberAge >= 60) {
-            return (int) (1600 * 0.75);
+            price = (int) (1600 * 0.75);
         }
-        return 0;
+        if(isStudying) {
+            return (price * (int) (0.85));
+        } else {
+            return price;
+        }
     }
 
     public int hasNotPaid() {
-        if(membership.equals("passivt") && hasPaid == false) {
-            return -500;
-        } else if(memberAge < 18 && isStudying == true && hasPaid == false) {
-            return (int) (-1000 * 0.85);
-        } else if(memberAge >= 18 && memberAge < 60 && isStudying == true && hasPaid == false) {
-            return (int) (-1600 * 0.85);
-        } else if(memberAge >= 60 && hasPaid == false) {
-            return (int) (-1600 * 0.75);
+        int price = 0;
+        if(membership.equals("passivt")) {
+            price = -500;
+        } else if(memberAge < 18) {
+            price = -1000;
+        } else if(memberAge >= 18 && memberAge < 60) {
+            price = -1600;
+        } else if(memberAge >= 60) {
+            price = (int) (-1600 * 0.75);
         }
-        return 0;
+        if(isStudying) {
+            return (price * (int) (0.85));
+        } else {
+            return price;
+        }
     }
 
     @Override
@@ -188,6 +172,7 @@ public class Member {
             text2 = "Konkurrencesvømmer";
         else
             text2 = "Motionistsvømmer";
+
         String text3;
         if(hasPaid)
             text3 = "Har betalt";
@@ -206,49 +191,6 @@ public class Member {
                 ", hasPaid =' " + text3 + '\'' +
                 '}';
     }
-
-    //  kontingentsats
-
-    public void memberAgeType() {
-
-        if (memberAge < 18) {
-            this.memberAgeType = "Junior";
-        } else if (memberAge > 60) {
-            this.memberAgeType = "Senior";
-        } else {
-            this.memberAgeType = "Voksen";
-        }
-    }
-
-    // beregn memberRate
-    public void Findrate() {
-        int kontingent = 0;
-        if (membership.contains("aktivt")) {
-            if (memberAgeType.equals("juniorsvømmer")) {
-                kontingent = 1000;
-            } else if (memberAgeType.equals("seniorsvømmer")) {
-                kontingent = 1600;
-
-            } else {
-                kontingent = 500;
-            }
-            memberRate = kontingent;
-        }
-    }
-
-   /* public String csvToString() {
-        String text;
-        if(isStudying)
-            text = "Studerende";
-        else
-            text = "Ikke Studerende";
-        String text2;
-        if(activity)
-            text2 = "Konkurrencesvømmer";
-        else
-            text2 = "Motionistsvømmer";
-        return memberName + ";" + text2 + ";" + membership + ";" + memberAge + ";" + text + ";" + memberNumber + ";" + eMail + ";" + birthday;
-    }*/
 
         public String csvToString () {
             return memberName + ";" + activity + ";" + membership + ";" + swimDiscipline + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;

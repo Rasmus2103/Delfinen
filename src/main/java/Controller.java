@@ -66,16 +66,6 @@ public class Controller {
         swimClub.createSeniorTeam();
     }
 
-    /*public void addTeamJunior() {
-        svømmeklub.addTeamJunior();
-    }*/
-
-    /*public void addTeamSenior() {
-        svømmeklub.addTeamSenior();
-    }*/
-
-
-
     public ArrayList<Member> getJuniorList() {
         return swimClub.getJuniorList();
     }

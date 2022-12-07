@@ -8,11 +8,6 @@ public class SeniorTeam {
     private ArrayList<TrainingResults> trainingResults = new ArrayList<>();
     private ArrayList<CompetitorResults> competitorResults = new ArrayList<>();
 
-    /*public SeniorTeam(Coach coach) {
-        this.coach = coach;
-        seniorMembers = new ArrayList<>();
-    }*/
-
     public SeniorTeam() {
         coach = new Coach("Andreas");
         seniorMembers = new ArrayList<>();
@@ -37,16 +32,6 @@ public class SeniorTeam {
     public void add(Member m) {
         seniorMembers.add(m);
     }
-
-    /*public void addTeammemberSenior(Member member) {
-        try {
-            if (member.getMemberAge() > 18 && member.getActivity()) {
-                seniorMembers.add(member);
-            }
-        } catch (NullPointerException npe) {
-
-        }
-    }*/
 
     public ArrayList<Member> getSeniorMembers() {
         return seniorMembers;

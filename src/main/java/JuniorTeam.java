@@ -8,19 +8,10 @@ public class JuniorTeam {
     private ArrayList<TrainingResults> trainingResults = new ArrayList<>();
     private ArrayList<CompetitorResults> competitorResults = new ArrayList<>();
 
-    /*public JuniorTeam(Coach coach) {
-        this.coach = coach;
-        juniorMembers = new ArrayList<>();
-    }*/
-
     public JuniorTeam() {
         coach = new Coach("Rasmus");
         juniorMembers = new ArrayList<>();
     }
-
-    /*public void addTræningsResultat(String resultat, String disciplin, LocalDate dato, String name) {
-        trainingResults.add(new TrainingResults(resultat, disciplin, dato, name));
-    }*/
 
     public void addTræningsResultat(TrainingResults resultat) {
         trainingResults.add(resultat);
