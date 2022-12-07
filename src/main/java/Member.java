@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Member {
     private String memberName;
@@ -12,7 +13,7 @@ public class Member {
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
-    private int subsription;
+    //private int subsription;
     private boolean hasPaid;
 
 
@@ -41,7 +42,6 @@ public class Member {
         //this.subsription = subsription;
         this.birthday = birthday;
         this.hasPaid = false;
-        //this.subsription = subsription;
     }
 
     public Member() {
@@ -88,8 +88,8 @@ public class Member {
         return birthday;
     }
 
-    public int getSubsription() {
-        return subsription;
+    public boolean getHasPaid() {
+        return hasPaid;
     }
 
     /*public int getSubsription() {
@@ -138,25 +138,32 @@ public class Member {
         this.hasPaid = true;
     }
 
-    public void setSubsription() {
-        this.subsription = subsription;
-    }
-
     /*public void setSubsription(int subsription) {
         this.subsription = subsription;
     }*/
 
-
     public int calculateSubsription() {
         if(membership.equals("passivt")) {
             return 500;
-        }
-        else if(memberAge < 18 && isStudying == true) {
+        } else if(memberAge < 18 && isStudying == true) {
             return (int) (1000 * 0.85);
         } else if(memberAge >= 18 && memberAge < 60 && isStudying == true) {
             return (int) (1600 * 0.85);
         } else if(memberAge >= 60) {
             return (int) (1600 * 0.75);
+        }
+        return 0;
+    }
+
+    public int hasNotPaid() {
+        if(membership.equals("passivt") && hasPaid == false) {
+            return -500;
+        } else if(memberAge < 18 && isStudying == true && hasPaid == false) {
+            return (int) (-1000 * 0.85);
+        } else if(memberAge >= 18 && memberAge < 60 && isStudying == true && hasPaid == false) {
+            return (int) (-1600 * 0.85);
+        } else if(memberAge >= 60 && hasPaid == false) {
+            return (int) (-1600 * 0.75);
         }
         return 0;
     }
@@ -174,6 +181,11 @@ public class Member {
             text2 = "Konkurrencesvømmer";
         else
             text2 = "Motionistsvømmer";
+        String text3;
+        if(hasPaid)
+            text3 = "Har betalt";
+        else
+            text3 = "I restance";
         return "Members{" +
                 "memberName='" + memberName + '\'' +
                 ", activities='" + text2 + '\'' +
@@ -184,7 +196,7 @@ public class Member {
                 ", memberNumber=" + memberNumber +
                 ", eMail='" + eMail + '\'' +
                 ", birthday='" + birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + '\'' +
-                ", har betalt= " + hasPaid +
+                ", hasPaid =' " + text3 + '\'' +
                 '}';
     }
 
@@ -203,6 +215,6 @@ public class Member {
     }*/
 
     public String csvToString() {
-        return memberName + ";" + activity + ";" + membership + ";" + swimDiscipline + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday + ";" + hasPaid;
+        return memberName + ";" + activity + ";" + membership + ";" + swimDiscipline + ";" + memberAge + ";" + isStudying + ";" + memberNumber + ";" + eMail + ";" + birthday;
     }
 }

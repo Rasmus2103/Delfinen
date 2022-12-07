@@ -122,6 +122,10 @@ public class Controller {
     }
 
     public int totalSubsription() {
-        return swimClub.totalSubsription();
+        return swimClub.totalSubscription();
+    }
+
+    public int totalHasNotPaid() {
+        return swimClub.totalHasNotPaid();
     }
 }

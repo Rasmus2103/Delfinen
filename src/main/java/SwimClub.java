@@ -44,10 +44,22 @@ public class SwimClub {
         }
     }
 
-    public int totalSubsription() {
+    public int totalSubscription() {
         int total = 0;
         for (Member m: memberList) {
-            total += m.calculateSubsription();
+            if(m.getHasPaid() == true) {
+                total += m.calculateSubsription();
+            }
+        }
+        return total;
+    }
+
+    public int totalHasNotPaid() {
+        int total = 0;
+        for(Member m: memberList) {
+            if(m.getHasPaid() == false) {
+                total += m.hasNotPaid();
+            }
         }
         return total;
     }
@@ -274,5 +286,4 @@ public class SwimClub {
     public ArrayList<CompetitorResults> competitorListSenior() {
         return seniorTeam.getCompetitorResults();
     }
-
 }

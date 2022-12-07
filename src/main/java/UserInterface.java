@@ -71,7 +71,7 @@ public class UserInterface {
                     registerPayment();
                     break;
                 case 2:
-                    totalSubspription();
+                    totalSubscription();
                     break;
                 case 9:
                     //start();
@@ -83,7 +83,8 @@ public class UserInterface {
         }
     }
 
-    private void totalSubspription() {
+    private void totalSubscription() {
+        System.out.println(controller.totalHasNotPaid() + " så mange penge mangler medlemmerne at betale");
         System.out.println(controller.totalSubsription() + " kr. ville den forventet betaling være");
     }
 
