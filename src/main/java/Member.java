@@ -13,8 +13,6 @@ public class Member {
     private boolean isStudying;
     private int memberNumber;
     private String eMail;
-    private String memberAgeType;
-    //private int subsription;
     private boolean hasPaid;
 
 
@@ -27,7 +25,6 @@ public class Member {
         this.isStudying = isStudying;
         this.memberNumber = memberNumber;
         this.eMail = eMail;
-        //this.subsription = subsription;
         this.birthday = birthday;
         this.hasPaid = false;
     }
@@ -102,10 +99,6 @@ public class Member {
         this.isStudying = isStudying;
     }
 
-    public void setMemberNumber(int memberNumber) {
-        this.memberNumber = memberNumber;
-    }
-
     public void seteMail(String eMail) {
         this.eMail = eMail;
     }
@@ -124,7 +117,7 @@ public class Member {
     }*/
 
     public int calculateSubsription() {
-        int price = 0;
+        double price = 0;
         if(membership.equals("passivt")) {
             price = 500;
         } else if(memberAge < 18) {
@@ -135,14 +128,14 @@ public class Member {
             price = (int) (1600 * 0.75);
         }
         if(isStudying) {
-            return (price * (int) (0.85));
+            return (int) (price * (0.85));
         } else {
-            return price;
+            return (int) price;
         }
     }
 
     public int hasNotPaid() {
-        int price = 0;
+        double price = 0;
         if(membership.equals("passivt")) {
             price = -500;
         } else if(memberAge < 18) {
@@ -153,9 +146,9 @@ public class Member {
             price = (int) (-1600 * 0.75);
         }
         if(isStudying) {
-            return (price * (int) (0.85));
+            return (int) (price * (0.85));
         } else {
-            return price;
+            return (int) price;
         }
     }
 

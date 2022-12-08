@@ -3,6 +3,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -149,6 +151,7 @@ public class UserInterface {
                     seeCompetitorJunior();
                     break;
                 case 6:
+                    topCompetitorsJunior();
                     break;
                 case 9:
                     coach();
@@ -176,7 +179,7 @@ public class UserInterface {
 
     public void seeCompetitorJunior() {
         for (int i = 0; i < controller.competitorListJunior().size(); i++) {
-            System.out.println(controller.trainingListJunior().get(i));
+            System.out.println(controller.competitorListJunior().get(i));
         }
     }
 
@@ -193,7 +196,18 @@ public class UserInterface {
 
     }
 
-    public void addTrainingResultSenior(){
+    private void topCompetitorsJunior() {
+        System.out.println("Her er oversigten over top 5 bedste konkurrencesvømmer");
+        ArrayList<CompetitorResults> sortedByBest = controller.competitorListJunior();
+        Comparator<CompetitorResults> timeComperator = new TimeComperator();
+        Collections.sort(sortedByBest, timeComperator);
+        for (CompetitorResults best : controller.competitorListJunior()) {
+            System.out.println(best.toString());
+        }
+    }
+
+
+        public void addTrainingResultSenior(){
 
         try {
             TrainingResults trainingResults = getTrainingResults();
@@ -266,19 +280,19 @@ public class UserInterface {
 
     private CompetitorResults getCompetitorResults() {
         System.out.println(" ");
-        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet");
+        System.out.println("Du ønsker at registrer et resultat \nStart med at skrive resultatet (tt:mm:ss)");
         String result = sc.nextLine();
         System.out.println("Du har registreret følgende resultat: " + result);
         System.out.println(" ");
 
-        System.out.println("Vælg hvilken svømme disciplin du ønsker");
+        System.out.println("Vælg hvilken svømme disciplin du ønsker (Crawl, Rygcrawl, Butterfly, Brystsvømning)");
         String chosenDiscipline = sc.nextLine();
         while (!controller.verifySwimDiscipline(chosenDiscipline)) {
             System.out.println("Du har forsøgt at indtaste et ikke eksisternde aktivitet prøve igen");
             chosenDiscipline = sc.nextLine();
         }
 
-        System.out.println("Indtast resultat dato");
+        System.out.println("Indtast resultat dato (dd-MM-yyyy)");
         String dateString = sc.nextLine();
         LocalDate dateOfResult;
         try {
@@ -328,6 +342,7 @@ public class UserInterface {
                     seeCompetitorSenior();
                     break;
                 case 6:
+                    topCompetitorsSenior();
                     break;
                 case 9:
                     coach();
@@ -356,6 +371,16 @@ public class UserInterface {
     public void seeCompetitorSenior() {
         for (int i = 0; i < controller.competitorListSenior().size(); i++) {
             System.out.println(controller.competitorListSenior().get(i));
+        }
+    }
+
+    private void topCompetitorsSenior() {
+        System.out.println("Her er oversigten over top 5 bedste konkurrencesvømmer");
+        ArrayList<CompetitorResults> sortedByBest = controller.competitorListSenior();
+        Comparator<CompetitorResults> timeComperator = new TimeComperator();
+        Collections.sort(sortedByBest, timeComperator);
+        for (CompetitorResults best : controller.competitorListSenior()) {
+            System.out.println(best.toString());
         }
     }
 
@@ -399,7 +424,7 @@ public class UserInterface {
                 }
             }
         } catch(NullPointerException npe) {
-
+            System.out.println(npe.getMessage());
         }
     }
 
